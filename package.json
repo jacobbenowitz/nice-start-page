@@ -2,7 +2,7 @@
   "name": "nice-start-page",
   "version": "1.0.0",
   "description": "custom startpage for Jacob",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
     "start": "node app.js",
     "server": "nodemon app.js",
