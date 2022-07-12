@@ -10,6 +10,12 @@ const validateRegisterInput = require('../../validation/register');
 const validateLoginInput = require('../../validation/login');
 
 
+router.get('/', (req, res) => {
+  User.find()
+    .then(users => res.status(200).json(users))
+    .catch(err => res.status(500).json(err))
+});
+
 router.get('/current', passport.authenticate(
   'jwt', { session: false }), (req, res) => {
     res.json({
@@ -17,7 +23,7 @@ router.get('/current', passport.authenticate(
       firstName: req.user.firstName,
       email: req.user.email
     });
-  })
+  });
 
 router.post('/register', (req, res) => {
   const { errors, isValid } = validateRegisterInput(req.body);

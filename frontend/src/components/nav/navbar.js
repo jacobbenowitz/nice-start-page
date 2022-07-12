@@ -3,7 +3,7 @@ import { Link } from "react-router-dom"
 import "./navbar.css"
 
 const NavBar = ({ loggedIn, logout }) => {
-  let navLinks
+  let navLinks;
 
   if (loggedIn) {
     navLinks = (

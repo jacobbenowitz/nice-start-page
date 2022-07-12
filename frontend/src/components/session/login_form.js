@@ -1,5 +1,6 @@
 import React from "react";
 import { withRouter } from 'react-router-dom';
+import { Link } from "react-router-dom";
 
 class LoginForm extends React.Component {
   constructor(props) {
@@ -7,7 +8,7 @@ class LoginForm extends React.Component {
     this.state = {
       email: "",
       password: "",
-      errors: {}
+      errors: []
     }
     this.handleSubmit = this.handleSubmit.bind(this)
     this.renderErrors = this.renderErrors.bind(this)
@@ -15,14 +16,15 @@ class LoginForm extends React.Component {
   }
 
   componentDidUpdate() {
-    if (!!this.props.errors) {
-      this.setState({errors: this.props.errors})
+    // debugger
+    if (this.props.errors.length) {
+      this.setState({ errors: this.props.errors })
     }
   }
 
   update(field) {
     return e => this.setState({
-      [field] : e.target.value
+      [field]: e.target.value
     })
   }
 
@@ -42,7 +44,7 @@ class LoginForm extends React.Component {
       email: email,
       password: password
     }
-    this.props.login(user).then(() => 
+    this.props.login(user).then(() =>
       this.props.history.push('/home')
     )
   }
@@ -55,6 +57,7 @@ class LoginForm extends React.Component {
   }
 
   render() {
+    // debugger
     return (
       <div className="session-wrapper">
         <form className="login session-form"

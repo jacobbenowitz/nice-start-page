@@ -1,4 +1,4 @@
-import {merge} from 'lodash'
+import { merge } from 'lodash'
 import { STATES } from 'mongoose';
 import {
   RECEIVE_CURRENT_USER,
@@ -19,8 +19,8 @@ const sessionReducer = (prevState = initialState, action) => {
     case RECEIVE_CURRENT_USER:
       return {
         ...prevState,
-        isAuthenticated: !!action.currentUser,
-        user: action.currentUser
+        isAuthenticated: !!action.user,
+        user: action.user
       }
     case RECEIVE_USER_LOGOUT:
       return initialState;
