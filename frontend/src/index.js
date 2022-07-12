@@ -30,7 +30,6 @@ document.addEventListener("DOMContentLoaded", () => {
   } else {
     store = configureStore()
   }
-  console.log('init store', store)
   /// testing start ///
   window.axios = axios
   window.getState = store.getState

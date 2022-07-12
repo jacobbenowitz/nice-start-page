@@ -1,5 +1,6 @@
 import React from "react";
 import { withRouter } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 class SignupForm extends React.Component {
   constructor(props) {
@@ -17,14 +18,17 @@ class SignupForm extends React.Component {
   }
 
   componentDidUpdate() {
-    if (!!this.props.errors) {
-      this.setState({errors: this.props.errors})
+    const { errors } = this.props
+
+    if (Object.keys(errors).length > 0 && Object.keys(errors).length !==
+      Object.keys(this.state.errors).length) {
+      this.setState({ errors: errors })
     }
   }
 
   update(field) {
     return e => this.setState({
-      [field] : e.target.value
+      [field]: e.target.value
     })
   }
 
@@ -46,9 +50,7 @@ class SignupForm extends React.Component {
       password: password,
       password2: password2
     }
-    this.props.signup(user).then(() => 
-      this.props.history.push('/home')
-    )
+    this.props.signup(user)
   }
 
   checkAllFields() {
@@ -80,7 +82,7 @@ class SignupForm extends React.Component {
             <label htmlFor="firstName">First Name</label>
             <input type={'text'}
               id='firstName'
-              value={this.state.email}
+              value={this.state.firstName}
               onChange={this.update('firstName')}
               placeholder='First Name'
               className={this.state.errors.firstName ? "text-input error" : "text-input"}
@@ -95,6 +97,7 @@ class SignupForm extends React.Component {
               value={this.state.password}
               onChange={this.update('password')}
               className={this.state.errors.password ? "text-input error" : "text-input"}
+              placeholder='••••••••••••'
             />
             {this.renderErrors('password')}
           </div>
@@ -106,16 +109,17 @@ class SignupForm extends React.Component {
               value={this.state.password2}
               onChange={this.update('password2')}
               className={this.state.errors.password2 ? "text-input error" : "text-input"}
+              placeholder='••••••••••••'
             />
             {this.renderErrors('password2')}
           </div>
           <button type='submit'
             className={this.checkAllFields() ? 'button-session' : 'button-session disabled'}>
-            Login
+            Signup
           </button>
           <span className="session-alt-link">
-            <p>Don't have an account?</p>
-            <Link to={'/signup'}>Sign Up</Link>
+            <p>Already have an account?</p>
+            <Link to={'/login'}>Login</Link>
           </span>
         </form>
       </div>
