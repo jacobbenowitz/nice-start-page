@@ -1,10 +1,4 @@
-import {
-  getLinks,
-  getUserLinks,
-  createLink,
-  updateLink,
-  deleteLink
-} from "../util/link_api_util";
+import * as LinkAPI from "../util/link_api_util";
 
 export const RECEIVE_LINKS = "RECEIVE_LINKS";
 export const RECEIVE_USER_LINKS = "RECEIVE_USER_LINKS";
@@ -40,35 +34,35 @@ const receiveLinkErrors = errors => ({
 // thunks
 
 export const fetchLinks = () => dispatch => {
-  return getLinks().then(links =>
+  return LinkAPI.getLinks().then(links =>
     dispatch(receiveLinks(links)))
     .catch(err => dispatch(
       receiveLinkErrors(err.response.data)));
 }
 
 export const fetchUserLinks = userId => dispatch => {
-  return getUserLinks(userId).then(links =>
+  return LinkAPI.getUserLinks(userId).then(links =>
     dispatch(receiveUserLinks(links)))
     .catch(err => dispatch(
       receiveLinkErrors(err.response.data)));
 }
 
 export const createLink = link => dispatch => {
-  return createLink(link).then(link =>
+  return LinkAPI.newLink(link).then(link =>
     dispatch(receiveLink(link)))
     .catch(err => dispatch(
       receiveLinkErrors(err.response.data)));
 }
 
 export const updateLink = link => dispatch => {
-  return updateLink(link).then(link =>
+  return LinkAPI.patchLink(link).then(link =>
     dispatch(receiveLink(link)))
     .catch(err => dispatch(
       receiveLinkErrors(err.response.data)));
 }
 
 export const deleteLink = linkId => dispatch => {
-  return deleteLink(linkId)
+  return LinkAPI.deleteLink(linkId)
     .then(link =>
       dispatch(removeLink(link)))
     .catch(err => dispatch(

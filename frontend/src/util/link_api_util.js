@@ -8,11 +8,11 @@ export const getUserLinks = id => {
   return axios.get(`/api/links/user/${id}`);
 }
 
-export const createLink = link => {
+export const newLink = link => {
   return axios.post("/api/links", link);
 }
 
-export const updateLink = link => {
+export const patchLink = link => {
   return axios.patch(`/api/links/${link.id}`, link);
 }
 
