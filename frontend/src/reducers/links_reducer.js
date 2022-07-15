@@ -38,7 +38,7 @@ const linksReducer = (state = initialState, action) => {
     case RECEIVE_LINK:
       nextState.user[action.link.data._id] = action.link.data;
       nextState.all[action.link.data._id] = action.link.data;
-      nextState.status = NEW;
+      nextState.status = DONE;
       return nextState;
     case REMOVE_LINK:
       delete nextState.user[action.link.data._id];
