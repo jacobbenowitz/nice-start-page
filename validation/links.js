@@ -1,12 +1,20 @@
 const Validator = require('validator');
 const validText = require('./valid-text');
 const normalizeUrl = require('normalize-url')
+const sanitizeUrl = require("@braintree/sanitize-url").sanitizeUrl;
+const gmeta = require('gmeta');
+
+const handleURL = (url) => {
+  let sanitized = sanitizeUrl(url);
+  let normalized = normalizeUrl(sanitized);
+  return normalized;
+}
 
 module.exports = function validateLinkInput(data) {
   let errors = {};
 
   data.title = validText(data.title) ? data.title : '';
-  data.url = validText(data.url) ? normalizeUrl(data.url) : '';
+  data.url = validText(data.url) ? handleURL(data.url) : '';
   data.section = validText(data.section) ? data.section : '';
 
   // title

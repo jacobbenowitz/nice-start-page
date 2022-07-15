@@ -8,7 +8,6 @@ import {
 import { merge } from 'lodash'
 
 const IDLE = 'IDLE';
-const LOADING = 'LOADING';
 const DONE = 'DONE';
 
 const initialState = {
@@ -39,7 +38,7 @@ const linksReducer = (state = initialState, action) => {
     case RECEIVE_LINK:
       nextState.user[action.link.data._id] = action.link.data;
       nextState.all[action.link.data._id] = action.link.data;
-      nextState.status = DONE;
+      nextState.status = NEW;
       return nextState;
     case REMOVE_LINK:
       delete nextState.user[action.link.data._id];

@@ -5,12 +5,10 @@ import NewLinkContainer from "./new_link_container";
 const IDLE = 'IDLE';
 const LOADING = 'LOADING';
 const DONE = 'DONE';
-
 export default class Links extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      links: [],
       status: IDLE
     }
   }
@@ -23,17 +21,17 @@ export default class Links extends React.Component {
   }
 
   componentDidUpdate() {
-    const { links, linksStatus } = this.props;
+    const { linksStatus } = this.props;
     if (this.state.status === LOADING && linksStatus === DONE) {
       this.setState({
-        links: Object.values(links),
         status: DONE,
       });
     }
   }
 
   render() {
-    const { links, status } = this.state;
+    const { status } = this.state;
+    const { links } = this.props;
     let title, linkList;
     if (status !== DONE) {
       title = <h2>Loading links...</h2>;
@@ -50,7 +48,7 @@ export default class Links extends React.Component {
 
     return (
       <>
-        {/* <NewLinkContainer /> */}
+        <NewLinkContainer />
         <div className="links container">
           {title}
           {linkList}

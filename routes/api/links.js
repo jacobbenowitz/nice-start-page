@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const passport = require('passport');
 const Link = require('../../models/Link');
 const validateLinkInput = require('../../validation/links')
+const gmeta = require('gmeta');
 
 router.get("/test", (req, res) =>
   res.json({ msg: "This is the links route" })
@@ -33,20 +34,23 @@ router.get('/:id', (req, res) => {
 })
 
 router.post('/', passport.authenticate(
-  'jwt', { session: false }), (req, res) => {
-  const { errors, isValid } = validateLinkInput(req.body)
-  
-  if (!isValid) return res.status(400).json(errors)
+  'jwt', { session: false }), async (req, res) => {
+    const { errors, isValid } = validateLinkInput(req.body)
 
-  const newLink = new Link({
-    title: req.body.title,
-    url: req.body.url,
-    section: req.body.section,
-    user: req.body.user,
-  })
+    if (!isValid) return res.status(400).json(errors)
 
-  newLink.save().then(link => res.json(link))
-});
+    const metaData = await gmeta(req.body.url)
+    console.log('metaData', metaData)
+    const newLink = new Link({
+      title: req.body.title,
+      url: req.body.url,
+      section: req.body.section,
+      user: req.body.user,
+      metaData: metaData
+    })
+
+    newLink.save().then(link => res.json(link))
+  });
 
 router.delete('/:id', passport.authenticate(
   'jwt', { session: false }), (req, res) => {
@@ -59,9 +63,9 @@ router.delete('/:id', passport.authenticate(
         })
       }
     })
-    .catch(err => res.status(404).json({
-      nolinksfound: 'No Link found with that id'
-    }))
-});
+      .catch(err => res.status(404).json({
+        nolinksfound: 'No Link found with that id'
+      }))
+  });
 
 module.exports = router;

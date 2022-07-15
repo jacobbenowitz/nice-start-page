@@ -20,7 +20,11 @@ const LinkSchema = new Schema({
   },
   date: {
     type: Date,
-    defailt: Date.now
+    default: Date.now
+  },
+  metaData: {
+    type: Object,
+    default: {}
   }
 })
 module.exports = Link = mongoose.model('Link', LinkSchema)
