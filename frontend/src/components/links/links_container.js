@@ -7,12 +7,15 @@ import {
   fetchLinks
 } from "../../actions/link_actions";
 
-const mapStateToProps = state => {
+const mapStateToProps = ({ links, errors, session }) => {
   return {
-    allLinks: Object.values(state.links.all),
-    links: Object.values(state.links.user),
-    errors: state.errors.links,
-    currentUser: state.session.user,
+    allLinks: links.all,
+    links: links.user,
+    // allLinks: Object.values(links.all),
+    // links: Object.values(links.user),
+    errors: errors.links,
+    currentUser: session.user,
+    linksStatus: links.status
   };
 }
 

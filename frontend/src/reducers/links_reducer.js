@@ -5,11 +5,16 @@ import {
   REMOVE_LINK
 } from '../actions/link_actions';
 
-import merge from 'lodash'
+import { merge } from 'lodash'
+
+const IDLE = 'IDLE';
+const LOADING = 'LOADING';
+const DONE = 'DONE';
 
 const initialState = {
   all: {},
-  user: {}
+  user: {},
+  status: IDLE
 };
 
 const linksReducer = (state = initialState, action) => {
@@ -18,16 +23,28 @@ const linksReducer = (state = initialState, action) => {
 
   switch (action.type) {
     case RECEIVE_LINKS:
-      nextState.all = action.links.data;
+      action.links.data.forEach(link => {
+        console.log('link', link)
+        nextState.all[link._id] = link
+      }
+      )
+      nextState.status = DONE;
       return nextState;
     case RECEIVE_USER_LINKS:
-      nextState.user = action.links.data;
+      action.links.data.forEach(link =>
+        nextState.user[link._id] = link
+      )
+      nextState.status = DONE;
       return nextState;
     case RECEIVE_LINK:
       nextState.user[action.link.data._id] = action.link.data;
+      nextState.all[action.link.data._id] = action.link.data;
+      nextState.status = DONE;
       return nextState;
     case REMOVE_LINK:
       delete nextState.user[action.link.data._id];
+      delete nextState.all[action.link.data._id];
+      nextState.status = DONE;
       return nextState;
     default:
       return state;

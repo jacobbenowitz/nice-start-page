@@ -34,8 +34,10 @@ const receiveLinkErrors = errors => ({
 // thunks
 
 export const fetchLinks = () => dispatch => {
-  return LinkAPI.getLinks().then(links =>
-    dispatch(receiveLinks(links)))
+  return LinkAPI.getLinks().then(links => {
+    console.log("links", links);
+    dispatch(receiveLinks(links))
+  })
     .catch(err => dispatch(
       receiveLinkErrors(err.response.data)));
 }

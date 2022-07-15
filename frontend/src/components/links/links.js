@@ -1,5 +1,6 @@
 import React from "react";
 import SingleLink from "./single_link";
+import NewLinkContainer from "./new_link_container";
 
 const IDLE = 'IDLE';
 const LOADING = 'LOADING';
@@ -22,10 +23,10 @@ export default class Links extends React.Component {
   }
 
   componentDidUpdate() {
-    const { links } = this.props;
-    if (this.state.status === LOADING && links.length > 0) {
+    const { links, linksStatus } = this.props;
+    if (this.state.status === LOADING && linksStatus === DONE) {
       this.setState({
-        links: links,
+        links: Object.values(links),
         status: DONE,
       });
     }
@@ -34,25 +35,27 @@ export default class Links extends React.Component {
   render() {
     const { links, status } = this.state;
     let title, linkList;
-
     if (status !== DONE) {
       title = <h2>Loading links...</h2>;
       linkList = <div className="placeholder">..........</div>;
     } else {
       title = <h2>Links</h2>;
-      linkList = links.map(link => {
+      linkList = links.map(link =>
         <SingleLink
-          key={link.id}
+          key={link._id}
           link={link}
         />
-      });
+      );
     };
 
     return (
-      <div className="links container">
-        {title}
-        {linkList}
-      </div>
+      <>
+        {/* <NewLinkContainer /> */}
+        <div className="links container">
+          {title}
+          {linkList}
+        </div>
+      </>
     );
   }
 }

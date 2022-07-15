@@ -44,9 +44,7 @@ class LoginForm extends React.Component {
       email: email,
       password: password
     }
-    this.props.login(user).then(() =>
-      this.props.history.push('/home')
-    )
+    this.props.login(user)
   }
 
   checkAllFields() {

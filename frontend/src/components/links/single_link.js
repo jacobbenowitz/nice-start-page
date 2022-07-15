@@ -10,9 +10,9 @@ export default class SingleLink extends React.Component {
 
     return (
       <div className="link wrapper">
-        <span class='link title'>{title}</span>
-        <span class='link section'>{section}</span>
-        <span class='link url'>{url}</span>
+        <span className='link title'>{title}</span>
+        <span className='link section'>{section}</span>
+        <span className='link url'>{url}</span>
       </div>
     );
   }
