@@ -6,9 +6,11 @@ import MainPage from './main/main_page';
 import LoginFormContainer from './session/login_form_container';
 import SignupFormContainer from './session/signup_form_container';
 import LinksContainer from "./links/links_container";
+import '../index.css'
 
 const App = () => (
-  <div id='app' className="bg">
+  <div id='app' className="bg-surfaceDark h-screen w-screen fixed
+    top-0 left-0 text-slate-200">
     <NavBarContainer />
     <Switch>
       <AuthRoute exact path="/" component={MainPage} />

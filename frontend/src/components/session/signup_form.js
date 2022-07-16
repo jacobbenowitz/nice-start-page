@@ -66,21 +66,23 @@ class SignupForm extends React.Component {
         <form className="signup session-form"
           onSubmit={this.handleSubmit}
         >
-          <div className="form-input">
+          <div className="grid grid-cols-1 gap-6">
             <label htmlFor="signup-email">Email</label>
-            <input type={'text'}
+            <input type="text"
               id='signup-email'
               value={this.state.email}
               onChange={this.update('email')}
               placeholder='your@email.com'
-              className={this.state.errors.email ? "text-input error" : "text-input"}
+              className="mt-1 block w-full rounded-md bg-gray-100 
+              border-transparent  focus:border-gray-500 focus:bg-white
+              focus:ring-0"
             />
             {this.renderErrors('email')}
           </div>
 
           <div className="form-input">
             <label htmlFor="firstName">First Name</label>
-            <input type={'text'}
+            <input type='text'
               id='firstName'
               value={this.state.firstName}
               onChange={this.update('firstName')}
@@ -92,7 +94,7 @@ class SignupForm extends React.Component {
 
           <div className="form-input">
             <label htmlFor="password">Password</label>
-            <input type={'password'}
+            <input type='password'
               id='password'
               value={this.state.password}
               onChange={this.update('password')}
@@ -104,7 +106,7 @@ class SignupForm extends React.Component {
 
           <div className="form-input">
             <label htmlFor="password2">Confirm Password</label>
-            <input type={'password'}
+            <input type='password'
               id='password2'
               value={this.state.password2}
               onChange={this.update('password2')}

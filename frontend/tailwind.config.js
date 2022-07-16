@@ -1,9 +1,9 @@
 const colors = require('tailwindcss/colors');
+const defaultTheme = require('tailwindcss/defaultTheme')
 
 module.exports = {
   mode: 'jit',
-  purge: ['./src/**/*.js', './src/**/*.jsx'],
-  purge: [],
+  content: ['./src/**/*.{html,js}'],
   darkMode: false, // or 'media' or 'class'
   theme: {
     extend: {
@@ -24,10 +24,15 @@ module.exports = {
         cyan: colors.cyan[900],
         rose: colors.rose[900],
       },
+      fontFamily: {
+        'sans': ['Proxima Nova', ...defaultTheme.fontFamily.sans],
+      },
     },
     variants: {
       extend: {},
     },
-    plugins: [],
+    plugins: [
+      require('@tailwindcss/forms'),
+    ],
   }
 }
