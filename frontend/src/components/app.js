@@ -8,7 +8,7 @@ import SignupFormContainer from './session/signup_form_container';
 import LinksContainer from "./links/links_container";
 
 const App = () => (
-  <div id='app'>
+  <div id='app' className="bg">
     <NavBarContainer />
     <Switch>
       <AuthRoute exact path="/" component={MainPage} />

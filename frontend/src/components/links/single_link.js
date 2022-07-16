@@ -14,7 +14,7 @@ export default class SingleLink extends React.Component {
     } else if ('og:image' in metaData) {
       image = <img src={metaData['og:image']} alt={title}
         style={{ width: '32px' }}
-      />;
+      />
     }
     if ('icon' in metaData) {
       icon = <img src={metaData.icon} alt={title} />;
@@ -29,4 +29,4 @@ export default class SingleLink extends React.Component {
       </div>
     );
   }
-}
+};

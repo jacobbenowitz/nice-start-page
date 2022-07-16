@@ -1,0 +1,11 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+/* how to build custom tailwind classes */
+/* @layer components {
+  .class-name {
+    @apply <tailwind classes here>;
+  }
+} */
