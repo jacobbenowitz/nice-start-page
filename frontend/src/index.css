@@ -2,6 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
+@import "./stylesheets/typography.css";
+
 
 /* how to build custom tailwind classes */
 /* @layer components {
