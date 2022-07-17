@@ -9,7 +9,7 @@ import LinksContainer from "./links/links_container";
 import '../index.css'
 
 const App = () => (
-  <div id='app' className="bg-gray-800 h-screen w-screen fixed
+  <div id='app' className="bg-gray-900 h-screen w-screen fixed
     top-0 left-0 text-slate-200">
     <NavBarContainer />
     <Switch>

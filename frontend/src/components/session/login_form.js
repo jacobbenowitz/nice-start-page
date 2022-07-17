@@ -1,6 +1,8 @@
 import React from "react";
 import { withRouter } from 'react-router-dom';
 import { Link } from "react-router-dom";
+import InputPassword from "../form/input_password";
+import InputText from "../form/input_text";
 
 class LoginForm extends React.Component {
   constructor(props) {
@@ -57,41 +59,38 @@ class LoginForm extends React.Component {
   render() {
     // debugger
     return (
-      <div className="session-wrapper">
-        <form className="login session-form"
+      <div className="w-screen h-screen flex items-center justify-center place-content-center">
+        <form className="flex flex-col bg-gray-800 px-12 py-6 rounded-xl"
           onSubmit={this.handleSubmit}
         >
-          <div className="form-input">
-            <label htmlFor="email">Email</label>
-            <input type={'text'}
-              id='login-email'
-              value={this.state.email}
-              onChange={this.update('email')}
-              placeholder='your@email.com'
-              className={this.state.errors.email ? "text-input error" : "text-input"}
-            />
-            {this.renderErrors('email')}
-          </div>
-
-          <div className="form-input">
-            <label htmlFor="password">Password</label>
-            <input type={'password'}
-              id='password'
-              value={this.state.password}
-              onChange={this.update('password')}
-              placeholder='password'
-              className={this.state.errors.password ? "text-input error" : "text-input"}
-            />
-            {this.renderErrors('password')}
-          </div>
+          <h3 className="mb-10 text-center">Login</h3>
+          <InputText
+            label={'Email'}
+            id={'login-email'}
+            value={this.state.email}
+            handleChange={this.update('email')}
+            placeholder={'your@email.com'}
+            errors={this.renderErrors('email')}
+          />
+          <InputPassword 
+            label={'Password'}
+            id={'login-password'}
+            value={this.state.password}
+            handleChange={this.update('password')}
+            errors={this.renderErrors('password')}
+          />
           <button type='submit'
-            className={this.checkAllFields() ? 'button-session' : 'button-session disabled'}>
+            className='bg-gray-300 text-center w-max text-gray-900
+            px-4 py-1 rounded-md
+            hover:font-bold
+            focus:font-bold focus:text-amber-500 focus:bg-gray-100'>
+            {/* className={this.checkAllFields() ? 'bg-gray-100 text-center text-grey-900 w-max' : 'disabled bg-gray-700 text-center w-max text-gray-400'}> */}
             Login
           </button>
-          <span className="session-alt-link">
+          <div className="flex flex-col mt-8 gap-2">
             <p>Don't have an account?</p>
             <Link to={'/signup'}>Sign Up</Link>
-          </span>
+          </div>
         </form>
       </div>
     )
