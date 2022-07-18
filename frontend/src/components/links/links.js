@@ -12,7 +12,7 @@ const Links = ({ userData }) => {
   const dragNode = useRef();
 
   const handleDragStart = (e, params) => {
-    console.log('drag start', params)
+    console.log('drag start..', params)
     dragItem.current = params;
     dragNode.current = e.target;
     dragNode.current.addEventListener('dragend', handleDragEnd)
@@ -22,19 +22,24 @@ const Links = ({ userData }) => {
   }
 
   const handleDragEnd = () => {
+    console.log('end drag..')
+    toggleDragging(false)
     dragNode.current.removeEventListener('dragend', handleDragEnd)
     dragItem.current = null;
     dragNode.current = null;
-    toggleDragging(false)
   }
 
+  const handleDragOver = (e, params) => {
+    console.log('dragover..', params)
+  }
 
-  const dragStyles = ({sectionIdx, linkIdx}) => {
+  const dragStyles = (sectionIdx, linkIdx) => {
     const currItem = dragItem.current;
+    console.log('dragStyles..', sectionIdx, linkIdx)
     if (currItem.sectionIdx === sectionIdx &&
       currItem.linkIdx === linkIdx
     ) {
-      return "flex flex-col justify-center items-center min-h-150 opacity-20 bg-gray-400 my-2 text-center"
+      return "flex flex-col justify-center items-center min-h-150 bg-gray-600 my-2 text-center opacity-50"
     }
     return "flex flex-col justify-center items-center min-h-150 bg-gray-50 my-2 text-center"
   }
@@ -56,7 +61,8 @@ const Links = ({ userData }) => {
                 sectionIdx={sectionIdx}
                 linkIdx={linkIdx}
                 dragStyles={dragStyles}
-                dragStart={(e) => handleDragStart(e, { sectionIdx, linkIdx })}
+                dragStart={handleDragStart}
+                dragOver={handleDragOver}
               />
             ))}
           </div>
