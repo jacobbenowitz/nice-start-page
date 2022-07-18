@@ -7,9 +7,11 @@ const NavBar = ({ loggedIn, logout }) => {
 
   if (loggedIn) {
     navLinks = (
-      <button onClick={() => logout()}>
-        Logout
-      </button>
+      <Button
+        link="/"
+        text="Logout"
+        handleClick={logout}
+      />
     )
   } else {
     navLinks = (
@@ -24,7 +26,7 @@ const NavBar = ({ loggedIn, logout }) => {
     <div className="flex flex-row w-screen h-12 items-center justify-center">
       <div className="w-8" />
       <div className="flex-1 flex flex-row justify-between">
-        <h2 className="text-slate-50 font-bold">nice-start-page</h2>
+        <h4 className="text-slate-50 font-bold">nice-start-page</h4>
         <div className="flex flex-row items-center justify-between gap-5">
           {navLinks}
         </div>

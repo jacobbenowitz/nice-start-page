@@ -1,7 +1,8 @@
 import React from "react";
 import { withRouter } from 'react-router-dom';
 import { Link } from 'react-router-dom';
-
+import InputText from "../form/input_text";
+import InputPassword from "../form/input_password";
 class SignupForm extends React.Component {
   constructor(props) {
     super(props)
@@ -62,67 +63,49 @@ class SignupForm extends React.Component {
 
   render() {
     return (
-      <div className="session-wrapper">
-        <form className="signup session-form"
-          onSubmit={this.handleSubmit}
-        >
-          <div className="grid grid-cols-1 gap-6">
-            <label htmlFor="signup-email">Email</label>
-            <input type="text"
-              id='signup-email'
-              value={this.state.email}
-              onChange={this.update('email')}
-              placeholder='your@email.com'
-              className="mt-1 block w-full rounded-md bg-gray-100 
-              border-transparent  focus:border-gray-500 focus:bg-white
-              focus:ring-0"
-            />
-            {this.renderErrors('email')}
-          </div>
-
-          <div className="form-input">
-            <label htmlFor="firstName">First Name</label>
-            <input type='text'
-              id='firstName'
-              value={this.state.firstName}
-              onChange={this.update('firstName')}
-              placeholder='What should we call you?'
-              className={this.state.errors.firstName ? "text-input error" : "text-input"}
-            />
-            {this.renderErrors('firstName')}
-          </div>
-
-          <div className="form-input">
-            <label htmlFor="password">Password</label>
-            <input type='password'
-              id='password'
-              value={this.state.password}
-              onChange={this.update('password')}
-              className={this.state.errors.password ? "text-input error" : "text-input"}
-              placeholder='••••••••••••'
-            />
-            {this.renderErrors('password')}
-          </div>
-
-          <div className="form-input">
-            <label htmlFor="password2">Confirm Password</label>
-            <input type='password'
-              id='password2'
-              value={this.state.password2}
-              onChange={this.update('password2')}
-              className={this.state.errors.password2 ? "text-input error" : "text-input"}
-              placeholder='••••••••••••'
-            />
-            {this.renderErrors('password2')}
-          </div>
+      <div className="w-screen h-screen flex items-center justify-center place-content-center">
+        <form className="flex flex-col w-72 bg-gray-800 px-12 py-6 rounded-xl"
+          onSubmit={this.handleSubmit}>
+          <h3 className="mb-10 text-center">Signup</h3>
+          <InputText
+            label="Email"
+            id="signup-email"
+            handleChange={this.update('email')}
+            value={this.state.email}
+            placeholder='your@email.com'
+            errors={this.renderErrors('email')}
+          />
+          <InputText
+            label="First Name"
+            id="signup-name"
+            handleChange={this.update('firstName')}
+            value={this.state.firstName}
+            placeholder='Name'
+            errors={this.renderErrors('firstName')}
+          />
+          <InputPassword
+            label="Password"
+            id='password'
+            value={this.state.password}
+            handleChange={this.update('password')}
+          />
+          <InputPassword
+            label="Confirm Password"
+            id='password2'
+            value={this.state.password2}
+            handleChange={this.update('password2')}
+          />
           <button type='submit'
-            className={this.checkAllFields() ? 'button-session' : 'button-session disabled'}>
+            className='bg-gray-300 font-bold text-center w-max text-gray-900
+            px-4 py-1 rounded-md
+            hover:bg-gray-50
+            focus:ring-2 focus:ring-amber-300'>
             Signup
           </button>
-          <span className="session-alt-link">
+          <div className="flex flex-col mt-8 gap-2">
             <p>Already have an account?</p>
             <Link to={'/login'}>Login</Link>
-          </span>
+          </div>
         </form>
       </div>
     )

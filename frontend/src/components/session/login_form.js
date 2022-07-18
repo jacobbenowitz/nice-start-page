@@ -60,7 +60,7 @@ class LoginForm extends React.Component {
     // debugger
     return (
       <div className="w-screen h-screen flex items-center justify-center place-content-center">
-        <form className="flex flex-col bg-gray-800 px-12 py-6 rounded-xl"
+        <form className="flex w-72 flex-col bg-gray-800 px-12 py-6 rounded-xl"
           onSubmit={this.handleSubmit}
         >
           <h3 className="mb-10 text-center">Login</h3>
@@ -80,11 +80,10 @@ class LoginForm extends React.Component {
             errors={this.renderErrors('password')}
           />
           <button type='submit'
-            className='bg-gray-300 text-center w-max text-gray-900
+            className='bg-gray-300 font-bold text-center w-max text-gray-900
             px-4 py-1 rounded-md
-            hover:font-bold
-            focus:font-bold focus:text-amber-500 focus:bg-gray-100'>
-            {/* className={this.checkAllFields() ? 'bg-gray-100 text-center text-grey-900 w-max' : 'disabled bg-gray-700 text-center w-max text-gray-400'}> */}
+            hover:bg-gray-50
+            focus:ring-2 focus:ring-amber-300'>
             Login
           </button>
           <div className="flex flex-col mt-8 gap-2">

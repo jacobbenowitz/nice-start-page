@@ -49,8 +49,45 @@ export default class Links extends React.Component {
     return (
       <>
         <NewLinkContainer />
-        <div className="links container">
+        <div className="w-screen mx-9 flex flex-col">
           {title}
+          <div className="grid grid-cols-autoFill-300 
+            w-full h-full max-w-full gap-2 items-start place-content-center">
+            
+            <div className="bg-gray-800 rounded-sm p-2">
+              <span className="text-lg font-bold">Section</span>
+              <div className="flex justify-center items-center 
+              min-h-150 bg-gray-50 my-2">
+                <span className="text-gray-900 font-medium text-lg">Test</span>
+              </div>
+              <div className="flex justify-center items-center 
+              min-h-150 bg-gray-50 my-2">
+                <span className="text-gray-900 font-medium text-lg">Test</span>
+              </div>
+            </div>
+
+            <div className="bg-gray-800 rounded-sm p-2">
+              <span className="text-lg font-bold">Section</span>
+              <div className="flex justify-center items-center 
+              min-h-150 bg-gray-50 my-2">
+                <span className="text-gray-900 font-medium text-lg">Test</span>
+              </div>
+              <div className="flex justify-center items-center 
+              min-h-150 bg-gray-50 my-2">
+                <span className="text-gray-900 font-medium text-lg">Test</span>
+              </div>
+              <div className="flex justify-center items-center 
+              min-h-150 bg-gray-50 my-2">
+                <span className="text-gray-900 font-medium text-lg">Test</span>
+              </div>
+            </div>
+
+            <div className="bg-gray-800 rounded-sm p-2">
+              <span className="text-lg font-bold">Section</span>
+              
+            </div>
+
+          </div>
           {linkList}
         </div>
       </>
