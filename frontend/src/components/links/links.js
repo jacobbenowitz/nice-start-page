@@ -6,6 +6,10 @@ const Links = ({ userData }) => {
   const [links, updateLinks] = useState(userData);
   const [dragging, toggleDragging] = useState(false);
 
+  React.useEffect(() => {
+    updateLinks(userData)
+  }, userData)
+
   const dragItem = useRef();
   const dragNode = useRef();
 
@@ -69,7 +73,7 @@ const Links = ({ userData }) => {
     }
     return "flex flex-col justify-center items-center min-h-150 bg-gray-50 my-2 text-center"
   }
-  
+  console.log(links, userData)
   return (
     <div className="w-screen mx-9 my-5 flex flex-col">
       <div className="grid grid-cols-autoFill-300 
@@ -81,11 +85,13 @@ const Links = ({ userData }) => {
             onDragEnter={dragging && !section.links.length ?
               (e) => handleDragEnter(e, { sectionIdx, itemI: 0 }) : null}
           >
+            <h5 className="mb-4 mt-0">{section.label}</h5>
             {section.links.map((link, linkIdx) => (
               <DraggableLink
                 key={`${section.label}-${linkIdx}`}
                 title={link.title}
                 url={link.url}
+                metaData={link.metaData || {}}
                 dragging={dragging}
                 sectionIdx={sectionIdx}
                 linkIdx={linkIdx}

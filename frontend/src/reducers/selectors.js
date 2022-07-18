@@ -7,7 +7,8 @@ export const buildLinksProps = links => {
       sections[link.section].links.push({
         title: link.title,
         url: link.url,
-        date: link.date
+        date: link.date,
+        metaData: link.metaData
       })
     } else {
       sections[link.section] = {
@@ -16,7 +17,8 @@ export const buildLinksProps = links => {
           {
             title: link.title,
             url: link.url,
-            date: link.date
+            date: link.date,
+            metaData: link.metaData
           }
         ]
       }

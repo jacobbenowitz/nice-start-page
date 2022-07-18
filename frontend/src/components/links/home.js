@@ -6,23 +6,23 @@ const IDLE = 'IDLE';
 const LOADING = 'LOADING';
 const DONE = 'DONE';
 
-const sample = [
-  {
-    label: 'Main',
-    links: [
-      { title: "YouTube", url: "https://www.youtube.com/" },
-      { title: "Google", url: "https://www.google.com/" },
-      { title: "Gmail", url: "https://www.gmail.com/" },
-    ]
-  },
-  {
-    label: 'Work',
-    links: [
-      { title: "React Docs", url: "https://reactjs.org/docs/getting-started.html" },
-      { title: "Google Fonts", url: "https://fonts.google.com/" }
-    ]
-  }
-]
+// const sampleLinks = [
+//   {
+//     label: 'Main',
+//     links: [
+//       { title: "YouTube", url: "https://www.youtube.com/" },
+//       { title: "Google", url: "https://www.google.com/" },
+//       { title: "Gmail", url: "https://www.gmail.com/" },
+//     ]
+//   },
+//   {
+//     label: 'Work',
+//     links: [
+//       { title: "React Docs", url: "https://reactjs.org/docs/getting-started.html" },
+//       { title: "Google Fonts", url: "https://fonts.google.com/" }
+//     ]
+//   }
+// ]
 
 export default class Home extends React.Component {
   constructor(props) {
@@ -37,9 +37,15 @@ export default class Home extends React.Component {
     return (
       <>
         <NewLinkContainer />
-        <Links
-          userData={this.props.links}
-        />
+        {this.props.linksStatus === DONE ? ( 
+          <Links
+            userData={this.props.links}
+          />
+        ) : 
+          <div>
+            <span>Loading links...</span>
+          </div>
+        }
       </>
     )
   }
