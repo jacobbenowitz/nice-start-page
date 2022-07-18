@@ -1,5 +1,5 @@
 import React from "react";
-import LinksContainer from "./links_container";
+import Links from "./links";
 import NewLinkContainer from "./new_link_container";
 
 const IDLE = 'IDLE';
@@ -25,35 +25,20 @@ const sample = [
 ]
 
 export default class Home extends React.Component {
-  // constructor(props) {
-  //   super(props);
-  //   this.state = {
-  //     status: IDLE
-  //   }
-  // }
+  constructor(props) {
+    super(props);
+  }
 
-  // componentDidMount() {
-  //   if (this.state.status === IDLE) {
-  //     this.props.fetchUserLinks(this.props.currentUser.id);
-  //     this.setState({ status: LOADING });
-  //   }
-  // }
-
-  // componentDidUpdate() {
-  //   const { linksStatus } = this.props;
-  //   if (this.state.status === LOADING && linksStatus === DONE) {
-  //     this.setState({
-  //       status: DONE,
-  //     });
-  //   }
-  // }
+  componentDidMount() {
+    this.props.fetchUserLinks(this.props.currentUser.id);
+  }
 
   render() {
     return (
       <>
         <NewLinkContainer />
-        <LinksContainer 
-          userData={sample}
+        <Links
+          userData={this.props.links}
         />
       </>
     )

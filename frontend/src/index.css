@@ -5,15 +5,11 @@
 @tailwind components;
 @tailwind utilities;
 
-/* how to build custom tailwind classes */
-/* @layer components {
-  .class-name {
-    @apply <tailwind classes here>;
+@layer components {
+  .over {
+    @apply border-4 border-green-500 opacity-70;
   }
-} */
-/* font-family: 'Mulish', sans-serif;
-font-size: 1rem;
-color: #F8FAFC; */
+}
 
 @layer base {
   body {

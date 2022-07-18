@@ -1,16 +1,18 @@
 import { connect } from "react-redux";
-import Links from "./links";
+import Home from "./home";
+
 import {
   deleteLink,
   fetchUserLinks,
   updateLink,
   fetchLinks
 } from "../../actions/link_actions";
+import { buildLinksProps } from "../../reducers/selectors";
 
 const mapStateToProps = ({ links, errors, session }) => {
   return {
-    allLinks: Object.values(links.all),
-    links: Object.values(links.user),
+    allLinks: links.user,
+    links: buildLinksProps(Object.values(links.user)),
     errors: errors.links,
     currentUser: session.user,
     linksStatus: links.status
@@ -26,4 +28,4 @@ const mapDispatchToProps = dispatch => {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Links)
+export default connect(mapStateToProps, mapDispatchToProps)(Home)
