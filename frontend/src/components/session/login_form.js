@@ -2,7 +2,7 @@ import React from "react";
 import { withRouter } from 'react-router-dom';
 import { Link } from "react-router-dom";
 import InputPassword from "../form/input_password";
-import InputText from "../form/input_text";
+import LabeledInput from "../form/labeled_input";
 
 class LoginForm extends React.Component {
   constructor(props) {
@@ -63,8 +63,9 @@ class LoginForm extends React.Component {
         <form className="flex w-72 flex-col bg-gray-800 px-12 py-6 rounded-xl"
           onSubmit={this.handleSubmit}
         >
-          <h3 className="mb-10 text-center">Login</h3>
-          <InputText
+          <h3 className="mb-6 text-center">Login</h3>
+          <LabeledInput
+            type={'email'}
             label={'Email'}
             id={'login-email'}
             value={this.state.email}
@@ -72,13 +73,16 @@ class LoginForm extends React.Component {
             placeholder={'your@email.com'}
             errors={this.renderErrors('email')}
           />
-          <InputPassword 
+          <LabeledInput
+            type={'password'}
             label={'Password'}
             id={'login-password'}
             value={this.state.password}
             handleChange={this.update('password')}
+            placeholder={'••••••••••••'}
             errors={this.renderErrors('password')}
           />
+          <div className="spacer w-full h-4"/>
           <button type='submit'
             className='bg-gray-300 font-bold text-center w-max text-gray-900
             px-4 py-1 rounded-md

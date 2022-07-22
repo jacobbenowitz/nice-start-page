@@ -16,6 +16,22 @@ const Links = ({ userData }) => {
   const handleDragStart = (e, params) => {
     dragItem.current = params;
     dragNode.current = e.target;
+    // const width = dragNode.current.offsetWidth;
+    // const height = dragNode.current.offsetHeight;
+
+    // const dragImg = document.createElement("canvas")
+    // dragImg.width = width;
+    // dragImg.height = height;
+    // dragImg.className = "invisible"
+
+    // const ctx = dragImg.getContext("2d")
+    // ctx.fillStyle = "rgb(47, 68, 105)"
+    // ctx.fillStyle = "#FFD369"
+    // ctx.fillRect(0, 0, width, height)
+    // document.body.append(dragImg)
+    // e.dataTransfer.setData("text/plain", params)
+    // e.dataTransfer.setDragImage(dragImg, 0, 0)
+
     dragNode.current.addEventListener('dragend', handleDragEnd)
     dragNode.current.addEventListener('drop', handleDrop)
     setTimeout(() => {
@@ -66,10 +82,9 @@ const Links = ({ userData }) => {
 
   const dragStyles = (sectionIdx, linkIdx) => {
     const currItem = dragItem.current;
-    console.log('node', dragNode.current)
     const width = dragNode.current.offsetWidth;
     const height = dragNode.current.offsetHeight;
-    
+
     if (currItem.sectionIdx === sectionIdx &&
       currItem.linkIdx === linkIdx
     ) {
@@ -77,7 +92,7 @@ const Links = ({ userData }) => {
     }
     return `flex flex-col justify-center items-center w-min p-4 w-[${width}] h-[${height}] bg-gray-300 my-2 text-center opacity-50 rounded-md`
   }
-  
+
   return (
     <div className="w-screen mx-9 my-5 flex flex-col">
       <div className="grid grid-cols-autoFill-300 

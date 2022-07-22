@@ -17,7 +17,7 @@ const DraggableLink = ({
   }
 
   let image, icon;
-  
+
   if ('image' in metaData) {
     image = <img src={metaData.image} alt={title} />;
   }
@@ -49,6 +49,7 @@ const DraggableLink = ({
         onMouseOut={handleMouseOut}
         // className={"flex flex-col absolute -left-7 top-0 bg-gray-50"}
         className={hover ? "flex flex-col absolute -left-7 top-0 bg-transparent" : "hidden"}
+        id="link-icons"
       >
         <IconButton icon={<MdDragIndicator size="22" />} />
         <IconButton icon={<MdModeEdit size="22" />} />
@@ -59,10 +60,10 @@ const DraggableLink = ({
       >
         <div
           className="flex justify-center items-center max-w-9 max-h-9 w-9 h-9 bg-gray-900 rounded-md p-1 box-border">
-          <a href={url} target="_blank"
+          <div href={url} target="_blank"
             className="p-1" >
             {icon || image || title.slice(0, 2).toUpperCase()}
-          </a>
+          </div>
         </div>
         <span className="text-gray-50 font-medium text-sm">
           {title}
