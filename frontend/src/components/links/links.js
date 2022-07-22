@@ -66,14 +66,18 @@ const Links = ({ userData }) => {
 
   const dragStyles = (sectionIdx, linkIdx) => {
     const currItem = dragItem.current;
+    console.log('node', dragNode.current)
+    const width = dragNode.current.offsetWidth;
+    const height = dragNode.current.offsetHeight;
+    
     if (currItem.sectionIdx === sectionIdx &&
       currItem.linkIdx === linkIdx
     ) {
-      return "flex flex-col justify-center items-center min-h-150 bg-gray-600 my-2 text-center opacity-50"
+      return `flex flex-col justify-center items-center w-min p-4 w-[${width}] h-[${height}] bg-gray-600 my-2 text-center opacity-50 rounded-md`
     }
-    return "flex flex-col justify-center items-center min-h-150 bg-gray-50 my-2 text-center"
+    return `flex flex-col justify-center items-center w-min p-4 w-[${width}] h-[${height}] bg-gray-300 my-2 text-center opacity-50 rounded-md`
   }
-  console.log(links, userData)
+  
   return (
     <div className="w-screen mx-9 my-5 flex flex-col">
       <div className="grid grid-cols-autoFill-300 

@@ -2,8 +2,7 @@ import React from 'react';
 
 const IconButton = ({ icon }) => (
   <div
-    className='flex p-1 items-center justify-center rounded-full cursor-pointer
-    hover:bg-gray-400 hover:bg-opacity-25 '>
+    className='flex p-1 items-center justify-center cursor-pointer'>
     {icon}
   </div>
 )

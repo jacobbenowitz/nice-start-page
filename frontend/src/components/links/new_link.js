@@ -1,5 +1,6 @@
 import React from "react";
 import InputText from "../form/input_text";
+import InputUrl from "../form/input_url";
 
 const initialState = {
   title: "",
@@ -60,7 +61,7 @@ export default class NewLink extends React.Component {
             value={this.state.section}
             handleChange={this.update("section")}
           />
-          <InputText
+          <InputUrl
             label="Link URL"
             name="link-url"
             placeholder="https://www.link.com"
