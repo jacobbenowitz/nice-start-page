@@ -24,14 +24,19 @@ const DraggableLink = ({
       onDragLeave={dragLeave}
       className={dragging ?
         dragStyles(sectionIdx, linkIdx)
-        : "flex flex-col justify-center items-center min-h-40 bg-gray-50 my-2 text-center"
+        : "flex flex-col justify-center items-center min-h-40 bg-gray-600 bg-opacity-50 my-2 text-center"
       }>
+      <div
+        className="flex justify-center items-center w-9 h-9 bg-gray-800
+        rounded-md">
+        <a href={url} target="_blank"
+          className=" bg-gray-400 bg-opacity-30 rounded-full p-1" >
+          {icon ? icon : image ? image : title.slice(0,2).toUpperCase()}
+        </a>
+      </div>
       <span className="text-gray-900 font-medium text-lg">
         {title}
       </span>
-      <a href={url} target="_blank">
-        {icon ? icon : image ? image : title.slice(0,2).toUpperCase()}
-      </a>
     </div>
   )
 }
