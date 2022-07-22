@@ -2,7 +2,6 @@ const Validator = require('validator');
 const validText = require('./valid-text');
 const normalizeUrl = require('normalize-url')
 const sanitizeUrl = require("@braintree/sanitize-url").sanitizeUrl;
-const gmeta = require('gmeta');
 
 const handleURL = (url) => {
   let sanitized = sanitizeUrl(url);

@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 const passport = require('passport');
 const Link = require('../../models/Link');
 const validateLinkInput = require('../../validation/links')
-const gmeta = require('gmeta');
+const getMetaData = require('metadata-scraper')
 
 router.get("/test", (req, res) =>
   res.json({ msg: "This is the links route" })
@@ -37,20 +37,24 @@ router.post('/', passport.authenticate(
   'jwt', { session: false }), async (req, res) => {
     const { errors, isValid } = validateLinkInput(req.body)
 
-    if (!isValid) return res.status(400).json(errors)
+  if (!isValid) return res.status(400).json(errors)
+  // get metadata for link (icon, title, etc.)
+  const metaData = await getMetaData(req.body.url)
+  // remove undefined values
+  Object.keys(metaData).forEach(k => {
+    if (metaData[k] === undefined) delete metaData[k]
+  })
 
-    const metaData = await gmeta(req.body.url)
-    console.log('metaData', metaData)
-    const newLink = new Link({
-      title: req.body.title,
-      url: req.body.url,
-      section: req.body.section,
-      user: req.body.user,
-      metaData: metaData
-    })
+  const newLink = new Link({
+    title: req.body.title,
+    url: req.body.url,
+    section: req.body.section,
+    user: req.body.user,
+    metaData: metaData
+  })
 
-    newLink.save().then(link => res.json(link))
-  });
+  newLink.save().then(link => res.json(link))
+});
 
 router.delete('/:id', passport.authenticate(
   'jwt', { session: false }), (req, res) => {

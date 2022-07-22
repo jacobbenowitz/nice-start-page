@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import DraggableLink from "./draggable_link";
 
 const Links = ({ userData }) => {
@@ -6,7 +6,7 @@ const Links = ({ userData }) => {
   const [links, updateLinks] = useState(userData);
   const [dragging, toggleDragging] = useState(false);
 
-  React.useEffect(() => {
+  useEffect(() => {
     updateLinks(userData)
   }, userData)
 
