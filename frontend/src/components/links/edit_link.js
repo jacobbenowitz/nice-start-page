@@ -1,6 +1,4 @@
 import React from "react";
-import InputText from "../form/input_text";
-import InputUrl from "../form/input_url";
 import LabeledInput from "../form/labeled_input";
 
 const initialState = {
@@ -32,7 +30,7 @@ export default class NewLink extends React.Component {
       section: section,
       date: Date.now()
     }
-    this.props.createLink(link);
+    this.props.updateLink(link);
     this.setState(initialState);
   }
 
@@ -47,7 +45,7 @@ export default class NewLink extends React.Component {
       <div className="pt-8 w-screen flex items-center justify-center place-content-center">
         <form className="flex flex-col gap-4 bg-gray-800 px-12 py-6 rounded-xl"
           onSubmit={this.handleSubmit}>
-          <span className="mr-4 text-xl font-bold">New Link</span>
+          <span className="mr-4 text-xl font-bold">Edit Link</span>
           <LabeledInput
             type="text"
             id="new-title"
@@ -87,7 +85,7 @@ export default class NewLink extends React.Component {
               px-4 py-1 rounded-md h-10 self-end
               hover:bg-gray-50
               focus:ring-2 focus:ring-amber-300'>
-              Create link
+              Update link
             </button>
           </div>
         </form>

@@ -8,11 +8,10 @@ const LabeledInput = ({
 
   // if (type === "email") pattern = new RegExp("/^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/")
 
-  
+
   return (
     <div className="flex flex-col justify-start gap-1 min-w-max">
-      <label
-        className="opacity-80" htmlFor={id}>{label}</label>
+      <label className="opacity-80" htmlFor={id}>{label}</label>
       <input
         required={isRequired ? "required" : "optional"}
         // pattern={pattern}

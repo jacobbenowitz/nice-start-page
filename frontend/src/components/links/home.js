@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import LargeModal from "../modals/large_modal";
 import Links from "./links";
 import NewLinkContainer from "./new_link_container";
 
@@ -24,29 +25,49 @@ const DONE = 'DONE';
 //   }
 // ]
 
-export default class Home extends React.Component {
-  constructor(props) {
-    super(props);
+const Home = (props) => {
+
+  const [status, setStatus] = useState(IDLE);
+  const [newModal, toggleNewModal] = useState(false);
+  const [editModal, toggleEditModal] = useState(false);
+
+  useEffect(() => {
+    if (status === IDLE) {
+      props.fetchUserLinks(props.currentUser.id)
+        .then(() => setStatus(DONE))
+    }
+  })
+
+  const close = (modal) => {
+    modal === "new" ? toggleNewModal(false) :
+      toggleEditModal(false)
   }
 
-  componentDidMount() {
-    this.props.fetchUserLinks(this.props.currentUser.id);
+  const open = (modal) => {
+    modal === "new" ? toggleNewModal(true) :
+      toggleEditModal(true)
   }
 
-  render() {
-    return (
-      <>
-        <NewLinkContainer />
-        {this.props.linksStatus === DONE ? ( 
-          <Links
-            userData={this.props.links}
-          />
-        ) : 
-          <div>
-            <span>Loading links...</span>
-          </div>
-        }
-      </>
-    )
-  }
+
+  return (
+    <>
+      <button
+        onClick={() => open('new')}>
+        New Link
+      </button>
+      {newModal && <LargeModal
+        content={<NewLinkContainer cancel={() => close('new')} />} handleClose={() => close('new')} />}
+      {props.linksStatus === DONE ? (
+        <Links
+          userData={props.links}
+        />
+      ) :
+        <div>
+          <span>Loading links...</span>
+        </div>
+      }
+    </>
+  )
 }
+
+export default Home;

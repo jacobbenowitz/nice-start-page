@@ -1,5 +1,5 @@
-import { createLink } from "../../actions/link_actions";
-import NewLink from "./new_link";
+import { updateLink } from "../../actions/link_actions";
+import EditLink from "./edit_link";
 import { connect } from "react-redux";
 
 const mapStateToProps = (state) => {
@@ -11,8 +11,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    createLink: link => dispatch(createLink(link))
+    updateLink: link => dispatch(updateLink(link))
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(NewLink);
+export default connect(mapStateToProps, mapDispatchToProps)(EditLink);
