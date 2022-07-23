@@ -23,10 +23,8 @@ const linksReducer = (state = initialState, action) => {
   switch (action.type) {
     case RECEIVE_LINKS:
       action.links.data.forEach(link => {
-        console.log('link', link)
         nextState.all[link._id] = link
-      }
-      )
+      })
       nextState.status = DONE;
       return nextState;
     case RECEIVE_USER_LINKS:

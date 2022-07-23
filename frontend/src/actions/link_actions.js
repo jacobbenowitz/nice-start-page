@@ -63,6 +63,13 @@ export const updateLink = link => dispatch => {
       receiveLinkErrors(err.response.data)));
 }
 
+export const updateLinkIdx = (linkId, linkIdx) => dispatch => {
+  return LinkAPI.patchLinkIdx(linkId, linkIdx).then(link =>
+    dispatch(receiveLink(link)))
+    .catch(err => dispatch(
+      receiveLinkErrors(err.response.data)));
+}
+
 export const deleteLink = linkId => dispatch => {
   return LinkAPI.deleteLink(linkId)
     .then(link =>

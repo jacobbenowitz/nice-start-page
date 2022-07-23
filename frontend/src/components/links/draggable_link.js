@@ -4,8 +4,8 @@ import { MdModeEdit } from "react-icons/md"
 import IconButton from "../buttons/icon_button";
 
 const DraggableLink = ({
-  title, url, hostname, metaData, dragStart, dragEnter, dragOver, dragLeave,
-  dragging, dragStyles, sectionIdx, linkIdx }) => {
+  title, id, url, hostname, metaData, dragStart, dragEnter, dragOver, dragLeave,
+  dragging, dragStyles, sectionIdx, linkIdx, open }) => {
 
   const [hover, toggleHover] = useState(false);
 
@@ -48,11 +48,17 @@ const DraggableLink = ({
         onMouseOver={handleMouseIn}
         onMouseOut={handleMouseOut}
         // className={"flex flex-col absolute -left-7 top-0 bg-gray-50"}
-        className={hover ? "flex flex-col absolute -left-7 top-0 bg-transparent" : "hidden"}
+        className={hover ? "flex flex-col absolute -left-5 top-0 w-8 bg-gray-600 rounded-md" : "hidden"}
         id="link-icons"
       >
-        <IconButton icon={<MdDragIndicator size="22" />} />
-        <IconButton icon={<MdModeEdit size="22" />} />
+        <div className="flex flex-row w-6 h-6 items-center justify-center">
+          <IconButton icon={<MdDragIndicator size="22" />} />
+        </div>
+        <div className="flex flex-row w-6 h-6 items-center justify-center"
+          onClick={e => open('edit', id)}
+        >
+          <IconButton icon={<MdModeEdit size="18" />} />
+        </div>
       </div>
       {/* link icon and container */}
       <a href={url} target="_blank"

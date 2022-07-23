@@ -5,7 +5,8 @@ import {
   deleteLink,
   fetchUserLinks,
   updateLink,
-  fetchLinks
+  fetchLinks,
+  updateLinkIdx
 } from "../../actions/link_actions";
 import { buildLinksProps } from "../../reducers/selectors";
 
@@ -25,6 +26,7 @@ const mapDispatchToProps = dispatch => {
     fetchUserLinks: userId => dispatch(fetchUserLinks(userId)),
     fetchLinks: () => dispatch(fetchLinks()),
     updateLink: link => dispatch(updateLink(link)),
+    updateLinkIdx: (linkId, linkIdx) => dispatch(updateLinkIdx(linkId, linkIdx))
   };
 }
 

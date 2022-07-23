@@ -3,7 +3,7 @@ import Clock from "../widgets/clock";
 import DraggableLink from "./draggable_link";
 import LinkPlaceholder from "./link_placeholder";
 
-const Links = ({ userData }) => {
+const Links = ({ userData, open, updateLink, updateLinkIdx }) => {
 
   const [links, updateLinks] = useState(userData);
   const [dragging, toggleDragging] = useState(false);
@@ -15,6 +15,7 @@ const Links = ({ userData }) => {
   const dragItem = useRef();
   const dragNode = useRef();
 
+  // @params = [sectionIdx, linkIdx]
   const handleDragStart = (e, params) => {
     dragItem.current = params;
     dragNode.current = e.target;
@@ -45,6 +46,9 @@ const Links = ({ userData }) => {
     toggleDragging(false)
     dragNode.current.removeEventListener('dragend', handleDragEnd)
     dragNode.current.removeEventListener('drop', handleDrop)
+    const currSection = links[dragItem.current.sectionIdx].links
+    const currLink = currSection[dragItem.current.linkIdx]
+    updateLinkIdx(currLink._id, dragItem.current.linkIdx)
     dragItem.current = null;
     dragNode.current = null;
   }
@@ -113,6 +117,7 @@ const Links = ({ userData }) => {
               {section.links.map((link, linkIdx) => (
                 <DraggableLink
                   key={`${section.label}-${linkIdx}`}
+                  id={link._id}
                   title={link.title}
                   hostname={link.hostname}
                   url={link.url}
@@ -125,6 +130,7 @@ const Links = ({ userData }) => {
                   dragEnter={handleDragEnter}
                   dragOver={handleDragOver}
                   dragLeave={handleDragLeave}
+                  open={open}
                 />
               ))}
               <LinkPlaceholder />

@@ -11,7 +11,7 @@ const initialState = {
 const NewLink = props => {
 
   const [link, updateLink] = useState(initialState);
-  console.log(props)
+  
   const handleSubmit = e => {
     e.preventDefault();
 

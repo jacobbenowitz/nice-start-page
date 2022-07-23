@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 const mapStateToProps = (state) => {
   return {
     errors: state.linksErrors,
+    links: state.links.user,
     currentUser: state.session.user
   };
 }

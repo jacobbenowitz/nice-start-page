@@ -6,7 +6,6 @@ import MainPage from './main/main_page';
 import LoginFormContainer from './session/login_form_container';
 import SignupFormContainer from './session/signup_form_container';
 import '../index.css'
-import Home from "./links/home";
 import home_container from "./links/home_container";
 
 const App = () => (
