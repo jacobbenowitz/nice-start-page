@@ -1,5 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
+import Clock from "../widgets/clock";
 import DraggableLink from "./draggable_link";
+import LinkPlaceholder from "./link_placeholder";
 
 const Links = ({ userData }) => {
 
@@ -88,14 +90,15 @@ const Links = ({ userData }) => {
     if (currItem.sectionIdx === sectionIdx &&
       currItem.linkIdx === linkIdx
     ) {
-      return `flex flex-col justify-center items-center w-min p-4 w-[${width}] h-[${height}] bg-gray-600 my-2 text-center opacity-50 rounded-md`
+      return `flex flex-col justify-center items-center w-min p-4 w-[${width}] h-[${height}] bg-gray-600 my-2 text-center opacity-80 rounded-md ring-2 ring-amber-300`
     }
-    return `flex flex-col justify-center items-center w-min p-4 w-[${width}] h-[${height}] bg-gray-300 my-2 text-center opacity-50 rounded-md`
+    return `flex flex-col justify-center items-center w-min p-4 w-[${width}] h-[${height}] bg-gray-600 my-2 text-center opacity-40 rounded-md `
   }
-  console.log(links)
+
   return (
     <div className="w-screen px-9 py-5 flex flex-col">
       <div className="grid grid-cols-autoFill-300 w-full h-full max-w-full gap-2 items-start place-content-center">
+        <Clock />
         {links.map((section, sectionIdx) => (
           <div
             key={`section-${sectionIdx}`}
@@ -106,7 +109,7 @@ const Links = ({ userData }) => {
             <div>
               <h5 className="mb-4 mt-0">{section.label}</h5>
             </div>
-            <div className="flex flex-row flex-wrap">
+            <div className="flex flex-row flex-wrap gap-1">
               {section.links.map((link, linkIdx) => (
                 <DraggableLink
                   key={`${section.label}-${linkIdx}`}
@@ -124,6 +127,7 @@ const Links = ({ userData }) => {
                   dragLeave={handleDragLeave}
                 />
               ))}
+              <LinkPlaceholder />
             </div>
           </div>
         ))}

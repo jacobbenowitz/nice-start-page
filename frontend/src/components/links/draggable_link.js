@@ -65,7 +65,7 @@ const DraggableLink = ({
             {icon || image || title.slice(0, 2).toUpperCase()}
           </div>
         </div>
-        <span className="text-gray-50 font-medium text-sm">
+        <span className="text-gray-50 font-medium text-sm whitespace-nowrap">
           {title}
         </span>
         {/* show hostname link on hover */}
@@ -74,7 +74,6 @@ const DraggableLink = ({
             {hostname}
           </span>
         </div> */}
-
       </a>
     </div>
   )

@@ -4,7 +4,6 @@ module.exports = {
   content: ['./src/**/*.{js,jsx}', './public/index.html'],
   darkMode: false, // or 'media' or 'class'
   theme: {
-    
     fontFamily: {
       sans: ['Mulish', 'sans-serif']
     },
@@ -13,7 +12,7 @@ module.exports = {
         'autoFill-300': 'repeat(auto-fill, minmax(300px, 1fr))'
       },
       backgroundSize: {
-        'b-1':  '100% 1px'
+        'b-1': '100% 1px'
       },
       backgroundPosition: {
         'b100': '0px 100%'
@@ -29,9 +28,11 @@ module.exports = {
         surfaceLight: "#64748B",
         yellow: "#FFD369"
       },
-    },
-    minHeight: {
-      '150': '150px',
+      minHeight: {
+        '150': '150px',
+        '92': '92px',
+        '168': '168px'
+      },
     },
     variants: {
       extend: {},
