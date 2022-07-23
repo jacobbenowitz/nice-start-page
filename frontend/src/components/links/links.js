@@ -92,7 +92,7 @@ const Links = ({ userData }) => {
     }
     return `flex flex-col justify-center items-center w-min p-4 w-[${width}] h-[${height}] bg-gray-300 my-2 text-center opacity-50 rounded-md`
   }
-
+  console.log(links)
   return (
     <div className="w-screen mx-9 my-5 flex flex-col">
       <div className="grid grid-cols-autoFill-300 
@@ -109,6 +109,7 @@ const Links = ({ userData }) => {
               <DraggableLink
                 key={`${section.label}-${linkIdx}`}
                 title={link.title}
+                hostname={link.hostname}
                 url={link.url}
                 metaData={link.metaData || {}}
                 dragging={dragging}

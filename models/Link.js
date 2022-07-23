@@ -14,6 +14,10 @@ const LinkSchema = new Schema({
     type: String,
     required: true
   },
+  hostname: {
+    type: String,
+    required: false
+  },
   section: {
     type: String,
     default: "main"

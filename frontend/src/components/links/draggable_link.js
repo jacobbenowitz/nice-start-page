@@ -4,7 +4,7 @@ import { MdModeEdit } from "react-icons/md"
 import IconButton from "../buttons/icon_button";
 
 const DraggableLink = ({
-  title, url, metaData, dragStart, dragEnter, dragOver, dragLeave,
+  title, url, hostname, metaData, dragStart, dragEnter, dragOver, dragLeave,
   dragging, dragStyles, sectionIdx, linkIdx }) => {
 
   const [hover, toggleHover] = useState(false);
@@ -68,6 +68,12 @@ const DraggableLink = ({
         <span className="text-gray-50 font-medium text-sm">
           {title}
         </span>
+        {/* show hostname link on hover */}
+        {/* <div>
+          <span className="text-gray-200 text-sm link max-w-full">
+            {hostname}
+          </span>
+        </div> */}
 
       </a>
     </div>

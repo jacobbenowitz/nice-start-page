@@ -3,8 +3,8 @@ const router = express.Router();
 const mongoose = require('mongoose');
 const passport = require('passport');
 const Link = require('../../models/Link');
-const validateLinkInput = require('../../validation/links')
-const getMetaData = require('metadata-scraper')
+const validateLinkInput = require('../../validation/links');
+const getMetaData = require('metadata-scraper');
 
 router.get("/test", (req, res) =>
   res.json({ msg: "This is the links route" })
@@ -45,9 +45,13 @@ router.post('/', passport.authenticate(
     if (metaData[k] === undefined) delete metaData[k]
   })
 
+  const nUrl = new URL(req.body.url)
+  console.log(nUrl.hostname)
+
   const newLink = new Link({
     title: req.body.title,
     url: req.body.url,
+    hostname: nUrl.hostname,
     section: req.body.section,
     user: req.body.user,
     metaData: metaData
