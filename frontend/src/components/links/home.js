@@ -56,7 +56,9 @@ const Home = (props) => {
         New Link
       </button>
       {newModal && <LargeModal
-        content={<NewLinkContainer cancel={() => close('new')} />} handleClose={() => close('new')} />}
+        content={<NewLinkContainer
+          cancel={() => close('new')} />}
+          handleClose={() => close('new')} />}
       {props.linksStatus === DONE ? (
         <Links
           userData={props.links}
