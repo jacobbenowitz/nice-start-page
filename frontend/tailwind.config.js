@@ -10,7 +10,7 @@ module.exports = {
     },
     extend: {
       gridTemplateColumns: {
-        'autoFill-300': 'repeat(auto-fill, 300px)'
+        'autoFill-300': 'repeat(auto-fill, minmax(300px, 1fr))'
       },
       backgroundSize: {
         'b-1':  '100% 1px'

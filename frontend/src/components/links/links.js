@@ -94,9 +94,8 @@ const Links = ({ userData }) => {
   }
   console.log(links)
   return (
-    <div className="w-screen mx-9 my-5 flex flex-col">
-      <div className="grid grid-cols-autoFill-300 
-            w-full h-full max-w-full gap-2 items-start place-content-center">
+    <div className="w-screen px-9 py-5 flex flex-col">
+      <div className="grid grid-cols-autoFill-300 w-full h-full max-w-full gap-2 items-start place-content-center">
         {links.map((section, sectionIdx) => (
           <div
             key={`section-${sectionIdx}`}
@@ -104,24 +103,28 @@ const Links = ({ userData }) => {
             onDragEnter={dragging && !section.links.length ?
               (e) => handleDragEnter(e, { sectionIdx, itemI: 0 }) : null}
           >
-            <h5 className="mb-4 mt-0">{section.label}</h5>
-            {section.links.map((link, linkIdx) => (
-              <DraggableLink
-                key={`${section.label}-${linkIdx}`}
-                title={link.title}
-                hostname={link.hostname}
-                url={link.url}
-                metaData={link.metaData || {}}
-                dragging={dragging}
-                sectionIdx={sectionIdx}
-                linkIdx={linkIdx}
-                dragStyles={dragStyles}
-                dragStart={handleDragStart}
-                dragEnter={handleDragEnter}
-                dragOver={handleDragOver}
-                dragLeave={handleDragLeave}
-              />
-            ))}
+            <div>
+              <h5 className="mb-4 mt-0">{section.label}</h5>
+            </div>
+            <div className="flex flex-row flex-wrap">
+              {section.links.map((link, linkIdx) => (
+                <DraggableLink
+                  key={`${section.label}-${linkIdx}`}
+                  title={link.title}
+                  hostname={link.hostname}
+                  url={link.url}
+                  metaData={link.metaData || {}}
+                  dragging={dragging}
+                  sectionIdx={sectionIdx}
+                  linkIdx={linkIdx}
+                  dragStyles={dragStyles}
+                  dragStart={handleDragStart}
+                  dragEnter={handleDragEnter}
+                  dragOver={handleDragOver}
+                  dragLeave={handleDragLeave}
+                />
+              ))}
+            </div>
           </div>
         ))}
       </div>

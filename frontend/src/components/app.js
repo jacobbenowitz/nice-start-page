@@ -10,8 +10,8 @@ import Home from "./links/home";
 import home_container from "./links/home_container";
 
 const App = () => (
-  <div id='app' className="bg-gray-900 h-screen w-screen fixed
-    top-0 left-0 text-slate-200">
+  <div id='app' className="bg-gray-900 h-screen w-screen max-w-screen-lg fixed
+    top-0 left-0 text-slate-20 box-border">
     <NavBarContainer />
     <Switch>
       <AuthRoute exact path="/" component={MainPage} />
