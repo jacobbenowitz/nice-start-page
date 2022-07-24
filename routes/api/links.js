@@ -64,11 +64,14 @@ router.post('/', passport.authenticate(
 router.delete('/:id', passport.authenticate(
   'jwt', { session: false }), (req, res) => {
     Link.findById(req.params.id).then(link => {
-      if (req.user.id !== link.user) {
+      if (req.user.id !== link.user.toString()) {
         res.status(400).json({ notallowed: 'User not authorized to delete this Link' })
       } else {
         Link.deleteOne({ _id: req.params.id }).then(() => {
-          res.status(200).json({ success: 'Link deleted successfully' })
+          res.status(200).json({
+            id: req.params.id,
+            success: 'Link deleted successfully'
+          })
         })
       }
     })
@@ -110,9 +113,7 @@ router.patch('/:id/idx', passport.authenticate(
     Link.findById(req.params.id).then(link => {
       link.linkIdx = req.body.linkIdx;
       link.section = req.body.section;
-      debugger
       link.save().then(link => {
-        // debugger
         res.json(link)
       })
     }).catch(err => res.json(err.message))

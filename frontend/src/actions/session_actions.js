@@ -51,3 +51,9 @@ export const logout = () => dispatch => {
   APIUtil.setAuthToken(false)
   dispatch(logoutUser())
 }
+
+export const updateLayout = layout => dispatch => {
+  APIUtil.patchLayout(layout).then(user =>
+    dispatch(receiveCurrentUser(user)))
+    .catch(err => dispatch(receiveErrors(err)))
+};

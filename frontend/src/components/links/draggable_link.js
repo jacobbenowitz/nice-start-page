@@ -1,11 +1,14 @@
 import React, { useState, useEffect, useRef } from "react";
-import { MdDragIndicator } from "react-icons/md"
-import { MdModeEdit } from "react-icons/md"
+import {
+  MdDragIndicator,
+  MdDelete,
+  MdModeEdit
+} from "react-icons/md";
 import IconButton from "../buttons/icon_button";
 
 const DraggableLink = ({
   title, id, url, hostname, metaData, dragStart, dragEnter, dragOver, dragLeave,
-  dragging, dragStyles, sectionIdx, linkIdx, open }) => {
+  dragging, dragStyles, sectionIdx, linkIdx, open, deleteLink, updateLayout }) => {
 
   const [hover, toggleHover] = useState(false);
 
@@ -58,6 +61,11 @@ const DraggableLink = ({
           onClick={e => open('edit', id)}
         >
           <IconButton icon={<MdModeEdit size="18" />} />
+        </div>
+        <div className="flex flex-row w-6 h-6 items-center justify-center"
+          onClick={e => deleteLink(id)}
+        >
+          <IconButton icon={<MdDelete size="18" />} />
         </div>
       </div>
       {/* link icon and container */}

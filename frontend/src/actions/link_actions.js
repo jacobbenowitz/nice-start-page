@@ -42,8 +42,8 @@ export const fetchLinks = () => dispatch => {
       receiveLinkErrors(err.response.data)));
 }
 
-export const fetchUserLinks = userId => dispatch => {
-  return LinkAPI.getUserLinks(userId).then(links =>
+export const fetchUserLinks = (id) => dispatch => {
+  return LinkAPI.getUserLinks(id).then(links =>
     dispatch(receiveUserLinks(links)))
     .catch(err => dispatch(
       receiveLinkErrors(err.response.data)));

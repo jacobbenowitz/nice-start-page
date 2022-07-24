@@ -23,7 +23,7 @@ const NavBar = ({ loggedIn, logout }) => {
   }
 
   return (
-    <div className="flex flex-row w-screen h-12 items-center justify-center fixed">
+    <div className="flex flex-row w-screen h-12 items-center justify-center fixed z-10">
       <div className="w-8" />
       <div className="flex-1 flex flex-row justify-between">
         <h4 className="text-slate-50 font-bold">nice-start-page</h4>

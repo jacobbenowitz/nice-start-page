@@ -22,7 +22,7 @@ router.get('/current', passport.authenticate(
       id: req.user.id,
       firstName: req.user.firstName,
       email: req.user.email,
-      links: req.user.links
+      layout: req.user.layout
     });
   });
 
@@ -72,7 +72,6 @@ router.post('/register', (req, res) => {
     })
 })
 
-
 router.post('/login', (req, res) => {
   const { errors, isValid } = validateLoginInput(req.body);
 
@@ -92,11 +91,15 @@ router.post('/login', (req, res) => {
       bcrypt.compare(password, user.password)
         .then(isMatch => {
           if (isMatch) {
-            const payload = { id: user._id, firstName: user.firstName };
+            const payload = {
+              id: user._id,
+              firstName: user.firstName,
+            };
 
             jwt.sign(payload, keys.secretOrKey,
-              // Tell the key to expire in one hour
-              { expiresIn: 3600 }, (err, token) => {
+              // Tell the key to expire in one hour 
+              // { expiresIn: 3600 }, (err, token) => {
+              {}, (err, token) => {
                 res.json({
                   success: true,
                   token: 'Bearer ' + token
@@ -108,5 +111,17 @@ router.post('/login', (req, res) => {
         })
     })
 })
+
+router.patch('/layout', passport.authenticate(
+  'jwt', { session: false }), (req, res) => {
+    debugger
+    req.user.layout = {
+      ...req.user.layout,
+      ...req.body.layout
+    }
+    debugger
+    req.user.save().then(user => res.json(user))
+      .catch(err => console.log(err))
+  })
 
 module.exports = router;

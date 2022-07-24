@@ -4,7 +4,7 @@ import Root from './components/root'
 import configureStore from './store/store'
 import jwt_decode from 'jwt-decode'
 import { setAuthToken } from './util/session_api_util'
-import { logout } from './actions/session_actions'
+import { logout, updateLayout } from './actions/session_actions'
 import axios from 'axios'
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -34,6 +34,7 @@ document.addEventListener("DOMContentLoaded", () => {
   window.axios = axios
   window.getState = store.getState
   window.dispatch = store.dispatch
+  window.updateLayout = updateLayout
   /// testing end ///
 
   ReactDOM.render(<Root store={store} />, root)

@@ -9,6 +9,7 @@ import {
   updateLinkIdx
 } from "../../actions/link_actions";
 import { buildLinksProps } from "../../reducers/selectors";
+import { updateLayout } from "../../actions/session_actions";
 
 const mapStateToProps = ({ links, errors, session }) => {
   return {
@@ -23,11 +24,12 @@ const mapStateToProps = ({ links, errors, session }) => {
 const mapDispatchToProps = dispatch => {
   return {
     deleteLink: linkId => dispatch(deleteLink(linkId)),
-    fetchUserLinks: userId => dispatch(fetchUserLinks(userId)),
+    fetchUserLinks: (userId) => dispatch(fetchUserLinks(userId)),
     fetchLinks: () => dispatch(fetchLinks()),
     updateLink: link => dispatch(updateLink(link)),
     updateLinkIdx: (linkId, linkIdx, linkSection) =>
-      dispatch(updateLinkIdx(linkId, linkIdx, linkSection))
+      dispatch(updateLinkIdx(linkId, linkIdx, linkSection)),
+    updateLayout: (layout) => dispatch(updateLayout(layout))
   };
 }
 

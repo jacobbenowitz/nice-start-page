@@ -40,7 +40,7 @@ const Home = (props) => {
 
 
   return (
-    <div className="relative w-full box-border h-full overflow-hidden">
+    <div className="absolute w-full box-border h-full overflow-hidden">
       <NewLinkButton
         open={() => open('new')}
       />
@@ -74,6 +74,8 @@ const Home = (props) => {
             userData={props.links}
             open={open}
             updateLinkIdx={props.updateLinkIdx}
+            deleteLink={props.deleteLink}
+            updateLayout={props.updateLayout}
           />
         ) :
           <div>

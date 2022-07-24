@@ -14,7 +14,7 @@ const UserSchema = new Schema({
     type: String,
     required: true
   },
-  links: {
+  layout: {
     type: Object,
     default: {}
   },

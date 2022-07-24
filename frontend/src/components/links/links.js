@@ -2,14 +2,14 @@ import React, { useState, useRef, useEffect } from "react";
 import DraggableLink from "./draggable_link";
 import LinkPlaceholder from "./link_placeholder";
 
-const Links = ({ userData, open, updateLinkIdx }) => {
+const Links = ({ userData, open, updateLinkIdx, deleteLink, updateLayout }) => {
 
   const [links, updateLinks] = useState(userData);
   const [dragging, toggleDragging] = useState(false);
 
   useEffect(() => {
     updateLinks(userData)
-  }, [])
+  }, userData)
 
   const dragItem = useRef();
   const dragNode = useRef();
@@ -99,7 +99,7 @@ const Links = ({ userData, open, updateLinkIdx }) => {
       }
       let sectionLinks = links[sectionIdx].links;
       let linkSection = links[sectionIdx].label;
-      debugger
+
       for (let i = linkIdx; i < sectionLinks.length; i++) {
         let link = sectionLinks[i];
         if (link._id !== targetId.current) {
@@ -156,6 +156,7 @@ const Links = ({ userData, open, updateLinkIdx }) => {
                   dragOver={handleDragOver}
                   dragLeave={handleDragLeave}
                   open={open}
+                  deleteLink={deleteLink}
                 />
               ))}
               <LinkPlaceholder />
