@@ -2,7 +2,6 @@ import React from "react";
 import Backdrop from "./backdrop"
 
 const LargeModal = ({ handleClose, content }) => {
-  console.log('modal content', content)
   return (
     <Backdrop handleClick={handleClose}>
       <div

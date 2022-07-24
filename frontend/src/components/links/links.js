@@ -3,7 +3,7 @@ import Clock from "../widgets/clock";
 import DraggableLink from "./draggable_link";
 import LinkPlaceholder from "./link_placeholder";
 
-const Links = ({ userData, open, updateLink, updateLinkIdx }) => {
+const Links = ({ userData, open, updateLinkIdx }) => {
 
   const [links, updateLinks] = useState(userData);
   const [dragging, toggleDragging] = useState(false);

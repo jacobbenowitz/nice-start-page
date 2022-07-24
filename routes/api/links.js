@@ -44,7 +44,7 @@ router.post('/', passport.authenticate(
     Object.keys(metaData).forEach(k => {
       if (metaData[k] === undefined) delete metaData[k]
     })
-
+    // get hostname
     const nUrl = new URL(req.body.url)
 
     const newLink = new Link({
@@ -56,8 +56,25 @@ router.post('/', passport.authenticate(
       metaData: metaData
     })
 
-    newLink.save().then(link => res.json(link))
-  });
+    newLink.save().then(link => {
+      let linkIdx;
+
+      if (link.section in req.user.links) {
+        let linkGroup = req.user.links[link.section];
+        linkGroup.push(link._id);
+        linkIdx = linkGroup.length - 1;
+      } else {
+        req.user.links[link.section] = new Array([link._id]);
+        linkIdx = 0;
+      }
+      link.linkIdx = linkIdx;
+      link.save().then(link => {
+        req.user.save().then(user =>
+          res.status(200).json(link)
+        )
+      }).catch(err => console.log(err))
+    }).catch(err => console.log(err))
+  })
 
 router.delete('/:id', passport.authenticate(
   'jwt', { session: false }), (req, res) => {
@@ -101,8 +118,8 @@ router.patch('/:id', passport.authenticate(
 
       link.save().then(link => res.json(link).status(200))
     }).catch(err => res.status(400).json(err.message))
-});
-  
+  });
+
 router.patch('/idx/:id', passport.authenticate(
   'jwt', { session: false }), (req, res) => {
     Link.findById(req.params.id).then(async (link) => {

@@ -9,24 +9,6 @@ const IDLE = 'IDLE';
 const LOADING = 'LOADING';
 const DONE = 'DONE';
 
-// const sampleLinks = [
-//   {
-//     label: 'Main',
-//     links: [
-//       { title: "YouTube", url: "https://www.youtube.com/" },
-//       { title: "Google", url: "https://www.google.com/" },
-//       { title: "Gmail", url: "https://www.gmail.com/" },
-//     ]
-//   },
-//   {
-//     label: 'Work',
-//     links: [
-//       { title: "React Docs", url: "https://reactjs.org/docs/getting-started.html" },
-//       { title: "Google Fonts", url: "https://fonts.google.com/" }
-//     ]
-//   }
-// ]
-
 const Home = (props) => {
 
   const [status, setStatus] = useState(IDLE);
@@ -81,7 +63,6 @@ const Home = (props) => {
           <Links
             userData={props.links}
             open={open}
-            updateLink={props.updateLink}
             updateLinkIdx={props.updateLinkIdx}
           />
         ) :
