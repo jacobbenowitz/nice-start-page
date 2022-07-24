@@ -44,7 +44,7 @@ const EditLink = props => {
   }
 
   if (status === 'done') return (
-    <div className="pt-8 w-screen flex items-center justify-center place-content-center">
+    <div className="pt-8 w-screen flex items-center justify-center place-content-center w-min">
       <form className="flex flex-col gap-4 bg-gray-800 px-12 py-6 rounded-xl"
         onSubmit={handleSubmit}>
         <span className="mr-4 text-xl font-bold">Edit Link</span>

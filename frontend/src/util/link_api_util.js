@@ -16,8 +16,9 @@ export const patchLink = link => {
   return axios.patch(`/api/links/${link._id}`, link);
 }
 
-export const patchLinkIdx = (linkId, linkIdx) => {
-  return axios.patch(`/api/links/${linkId}/idx`, { linkIdx: linkIdx });
+export const patchLinkIdx = (linkId, linkIdx, linkSection) => {
+  return axios.patch(`/api/links/${linkId}/idx`,
+    { linkIdx: linkIdx, section: linkSection });
 }
 
 export const deleteLink = id => {

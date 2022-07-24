@@ -26,7 +26,8 @@ const mapDispatchToProps = dispatch => {
     fetchUserLinks: userId => dispatch(fetchUserLinks(userId)),
     fetchLinks: () => dispatch(fetchLinks()),
     updateLink: link => dispatch(updateLink(link)),
-    updateLinkIdx: (linkId, linkIdx) => dispatch(updateLinkIdx(linkId, linkIdx))
+    updateLinkIdx: (linkId, linkIdx, linkSection) =>
+      dispatch(updateLinkIdx(linkId, linkIdx, linkSection))
   };
 }
 

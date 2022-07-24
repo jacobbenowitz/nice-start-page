@@ -1,5 +1,4 @@
 import React, { useState, useRef, useEffect } from "react";
-import Clock from "../widgets/clock";
 import DraggableLink from "./draggable_link";
 import LinkPlaceholder from "./link_placeholder";
 
@@ -99,12 +98,14 @@ const Links = ({ userData, open, updateLinkIdx }) => {
         reject('missing section or link indexes')
       }
       let sectionLinks = links[sectionIdx].links;
+      let linkSection = links[sectionIdx].label;
+      debugger
       for (let i = linkIdx; i < sectionLinks.length; i++) {
         let link = sectionLinks[i];
         if (link._id !== targetId.current) {
-          updateLinkIdx(link._id, link.linkIdx + 1)
+          updateLinkIdx(link._id, link.linkIdx + 1, linkSection)
         } else {
-          updateLinkIdx(targetId.current, linkIdx)
+          updateLinkIdx(targetId.current, linkIdx, linkSection)
         }
       }
       resolve('updated all links')
@@ -125,9 +126,8 @@ const Links = ({ userData, open, updateLinkIdx }) => {
   }
 
   return (
-    <div className="w-full min-h-full px-9 py-5 overflow-y-auto">
+    <div className="w-full min-h-full px-9 pt-20 overflow-y-auto">
       <div className="grid grid-cols-autoFill-300 w-full max-w-full min-h-full gap-2 items-start place-content-center">
-        <Clock />
         {links.map((section, sectionIdx) => (
           <div
             key={`section-${sectionIdx}`}

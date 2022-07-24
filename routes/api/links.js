@@ -109,7 +109,8 @@ router.patch('/:id/idx', passport.authenticate(
   'jwt', { session: false }), (req, res) => {
     Link.findById(req.params.id).then(link => {
       link.linkIdx = req.body.linkIdx;
-      // debugger
+      link.section = req.body.section;
+      debugger
       link.save().then(link => {
         // debugger
         res.json(link)

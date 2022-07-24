@@ -3,7 +3,10 @@ import LargeModal from "../modals/large_modal";
 import EditLinkContainer from "./edit_link_container";
 import Links from "./links";
 import NewLinkContainer from "./new_link_container";
-import { MdOutlineAddCircle } from "react-icons/md"
+import { motion, AnimatePresence } from "framer-motion";
+import NewLinkButton from "../buttons/new_link_button";
+import Clock from "../widgets/clock";
+import GoogleSearch from "../widgets/google_search"
 
 const IDLE = 'IDLE';
 const LOADING = 'LOADING';
@@ -38,29 +41,33 @@ const Home = (props) => {
 
   return (
     <div className="relative w-full box-border h-full overflow-hidden">
-      <div className="absolute bottom-8 right-8">
-        <button className="cursor-pointer"
-          onClick={() => open('new')}>
-          <MdOutlineAddCircle size="32" />
-        </button>
-      </div>
-      {
-        newModal && <LargeModal content={
-          <NewLinkContainer
-            cancel={() => close('new')}
-            links={props.links}
-          />
+      <NewLinkButton
+        open={() => open('new')}
+      />
+      <AnimatePresence
+        initial={false}
+        exitBeforeEnter={true}
+        onExitComplete={() => null}
+      >
+        {
+          newModal && <LargeModal content={
+            <NewLinkContainer
+              cancel={() => close('new')}
+              links={props.links}
+            />
+          }
+            handleClose={() => close('new')} />
         }
-          handleClose={() => close('new')} />
-      }
-      {
-        editModal && <LargeModal content={
-          <EditLinkContainer linkId={editId}
-            cancel={() => close('edit')} />
+        {
+          editModal && <LargeModal content={
+            <EditLinkContainer linkId={editId}
+              cancel={() => close('edit')} />
+          }
+            handleClose={() => close('edit')} />
         }
-          handleClose={() => close('edit')} />
-      }
-
+      </AnimatePresence>
+      <Clock />
+      <GoogleSearch />
       {
         props.linksStatus === DONE ? (
           <Links
