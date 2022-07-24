@@ -24,7 +24,8 @@ const LinkSchema = new Schema({
   },
   linkIdx: {
     type: Number,
-    required: false
+    required: false,
+    default: 0
   },
   date: {
     type: Date,

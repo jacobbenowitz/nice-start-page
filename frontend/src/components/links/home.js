@@ -37,7 +37,7 @@ const Home = (props) => {
 
 
   return (
-    <div className="relative w-full box-border overflow-y-auto">
+    <div className="relative w-full box-border h-full overflow-hidden">
       <div className="absolute bottom-8 right-8">
         <button className="cursor-pointer"
           onClick={() => open('new')}>
@@ -46,7 +46,10 @@ const Home = (props) => {
       </div>
       {
         newModal && <LargeModal content={
-          <NewLinkContainer cancel={() => close('new')} />
+          <NewLinkContainer
+            cancel={() => close('new')}
+            links={props.links}
+          />
         }
           handleClose={() => close('new')} />
       }

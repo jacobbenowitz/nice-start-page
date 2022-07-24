@@ -10,15 +10,21 @@ const Links = ({ userData, open, updateLinkIdx }) => {
 
   useEffect(() => {
     updateLinks(userData)
-  }, userData)
+  }, [])
 
   const dragItem = useRef();
   const dragNode = useRef();
+  const targetId = useRef();
 
   // @params = [sectionIdx, linkIdx]
   const handleDragStart = (e, params) => {
     dragItem.current = params;
     dragNode.current = e.target;
+    // initiate ref to targetId
+    const currSection = links[dragItem.current.sectionIdx].links
+    const currLink = currSection[dragItem.current.linkIdx]
+    targetId.current = currLink._id;
+
     // const width = dragNode.current.offsetWidth;
     // const height = dragNode.current.offsetHeight;
 
@@ -42,15 +48,16 @@ const Links = ({ userData, open, updateLinkIdx }) => {
     }, 0)
   }
 
-  const handleDragEnd = () => {
+  const handleDragEnd = async () => {
     toggleDragging(false)
     dragNode.current.removeEventListener('dragend', handleDragEnd)
     dragNode.current.removeEventListener('drop', handleDrop)
-    const currSection = links[dragItem.current.sectionIdx].links
-    const currLink = currSection[dragItem.current.linkIdx]
-    updateLinkIdx(currLink._id, dragItem.current.linkIdx)
+    console.log('new idx', dragItem.current.linkIdx)
+    await updateLinksInSection(dragItem.current)
+    // increment idx of all links that come after target
     dragItem.current = null;
     dragNode.current = null;
+    targetId.current = null;
   }
 
   const handleDragEnter = (e, params) => {
@@ -84,6 +91,24 @@ const Links = ({ userData, open, updateLinkIdx }) => {
   const handleDrop = e => {
     e.stopPropagation();
     return false;
+  }
+
+  const updateLinksInSection = ({ sectionIdx, linkIdx }) => {
+    return new Promise((resolve, reject) => {
+      if (typeof linkIdx === 'undefined' || typeof sectionIdx === 'undefined') {
+        reject('missing section or link indexes')
+      }
+      let sectionLinks = links[sectionIdx].links;
+      for (let i = linkIdx; i < sectionLinks.length; i++) {
+        let link = sectionLinks[i];
+        if (link._id !== targetId.current) {
+          updateLinkIdx(link._id, link.linkIdx + 1)
+        } else {
+          updateLinkIdx(targetId.current, linkIdx)
+        }
+      }
+      resolve('updated all links')
+    })
   }
 
   const dragStyles = (sectionIdx, linkIdx) => {

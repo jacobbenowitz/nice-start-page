@@ -9,7 +9,7 @@ import '../index.css'
 import home_container from "./links/home_container";
 
 const App = () => (
-  <div id='app' className="bg-gray-900 min-h-screen w-screen relative
+  <div id='app' className="bg-gray-900 h-screen w-screen fixed
     top-0 left-0 text-slate-20 box-border">
     <NavBarContainer />
     <Switch>

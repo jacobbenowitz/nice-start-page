@@ -1,4 +1,5 @@
 const Validator = require('validator');
+const { check } = require('express-validator');
 const validText = require('./valid-text');
 const normalizeUrl = require('normalize-url')
 const sanitizeUrl = require("@braintree/sanitize-url").sanitizeUrl;
@@ -34,6 +35,11 @@ module.exports = function validateLinkInput(data) {
   if (!Validator.isLength(data.section, { min: 1, max: 50 })) {
     errors.section = 'Section must be between 1 and 50 characters'
   }
+  // debugger
+  // // linkIdx
+  // if (!check(data.linkIdx).isInt()) {
+  //   errors.linkIdx = 'Index is not a integer'
+  // }
 
   return {
     errors,

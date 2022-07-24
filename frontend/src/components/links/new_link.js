@@ -11,20 +11,28 @@ const initialState = {
 const NewLink = props => {
 
   const [link, updateLink] = useState(initialState);
-  
+
   const handleSubmit = e => {
     e.preventDefault();
+    let linkIdx;
+
+    props.links.forEach(section => {
+      if (section.label === link.section) {
+        linkIdx = section.links.length;
+      }
+    })
 
     const newLink = {
       user: props.currentUser.id,
       title: link.title,
       url: link.url,
       section: link.section,
-      date: Date.now()
+      date: Date.now(),
+      linkIdx: linkIdx
     }
     props.createLink(newLink);
     updateLink(initialState);
-    props.cancel()
+    props.cancel();
   }
 
   const update = (field) => {
