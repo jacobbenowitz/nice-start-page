@@ -100,8 +100,8 @@ const Links = ({ userData, open, updateLinkIdx }) => {
   }
 
   return (
-    <div className="w-screen px-9 py-5 flex flex-col">
-      <div className="grid grid-cols-autoFill-300 w-full h-full max-w-full gap-2 items-start place-content-center">
+    <div className="w-full min-h-full px-9 py-5 overflow-y-auto">
+      <div className="grid grid-cols-autoFill-300 w-full max-w-full min-h-full gap-2 items-start place-content-center">
         <Clock />
         {links.map((section, sectionIdx) => (
           <div

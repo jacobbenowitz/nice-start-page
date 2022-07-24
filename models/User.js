@@ -15,8 +15,8 @@ const UserSchema = new Schema({
     required: true
   },
   links: {
-    type: Array,
-    required: false
+    type: Object,
+    default: {}
   },
   date: {
     type: Date,

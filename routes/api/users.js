@@ -21,7 +21,8 @@ router.get('/current', passport.authenticate(
     res.json({
       id: req.user.id,
       firstName: req.user.firstName,
-      email: req.user.email
+      email: req.user.email,
+      links: req.user.links
     });
   });
 

@@ -36,9 +36,8 @@ router.get('/:id', (req, res) => {
 router.post('/', passport.authenticate(
   'jwt', { session: false }), async (req, res) => {
     const { errors, isValid } = validateLinkInput(req.body)
-
     if (!isValid) return res.status(400).json(errors)
-    // get metadata for link (icon, title, etc.)
+
     const metaData = await getMetaData(req.body.url)
     // remove undefined values
     Object.keys(metaData).forEach(k => {
@@ -56,24 +55,31 @@ router.post('/', passport.authenticate(
       metaData: metaData
     })
 
-    newLink.save().then(link => {
-      let linkIdx;
+    newLink.save().then(link =>
+      res.status(200).json(link)
+    ).catch(err => console.log(err))
+    // newLink.save().then(link => {
+    //   let linkIdx;
 
-      if (link.section in req.user.links) {
-        let linkGroup = req.user.links[link.section];
-        linkGroup.push(link._id);
-        linkIdx = linkGroup.length - 1;
-      } else {
-        req.user.links[link.section] = new Array([link._id]);
-        linkIdx = 0;
-      }
-      link.linkIdx = linkIdx;
-      link.save().then(link => {
-        req.user.save().then(user =>
-          res.status(200).json(link)
-        )
-      }).catch(err => console.log(err))
-    }).catch(err => console.log(err))
+    //   if (link.section in req.user.links) {
+    //     req.user.links[link.section].push(link._id);
+    //     linkIdx = req.user.links[link.section].length - 1;
+    //   } else {
+    //     req.user.links[link.section] = new Array(link._id);
+    //     linkIdx = 0;
+    //   }
+
+    //   link.linkIdx = linkIdx;
+    //   link.save().then(link =>
+    //     req.user.save().then(user => {
+    //       console.log(user.links)
+    //       // prints correct to console but not updating on MongoDB ?
+    //       return res.status(200).json(link)
+    //     }
+    //     )
+    //   ).catch(err => console.log(err))
+    // })
+    // .catch(err => console.log(err))
   })
 
 router.delete('/:id', passport.authenticate(
@@ -124,7 +130,7 @@ router.patch('/idx/:id', passport.authenticate(
   'jwt', { session: false }), (req, res) => {
     Link.findById(req.params.id).then(async (link) => {
       const { linkIdx } = req.body;
-
+      // debugger
       link.linkIdx = linkIdx || link.linkIdx;
 
       link.save().then(link => res.json(link).status(200))

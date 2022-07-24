@@ -37,7 +37,7 @@ const Home = (props) => {
 
 
   return (
-    <>
+    <div className="relative w-full box-border overflow-y-auto">
       <div className="absolute bottom-8 right-8">
         <button className="cursor-pointer"
           onClick={() => open('new')}>
@@ -70,7 +70,7 @@ const Home = (props) => {
             <span>Loading links...</span>
           </div>
       }
-    </>
+    </div>
   )
 }
 
