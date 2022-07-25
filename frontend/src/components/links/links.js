@@ -9,7 +9,7 @@ const Links = ({ userData, open, updateLinkIdx, deleteLink, updateLayout }) => {
 
   useEffect(() => {
     updateLinks(userData)
-  }, userData)
+  }, [])
 
   const dragItem = useRef();
   const dragNode = useRef();
@@ -51,7 +51,7 @@ const Links = ({ userData, open, updateLinkIdx, deleteLink, updateLayout }) => {
     toggleDragging(false)
     dragNode.current.removeEventListener('dragend', handleDragEnd)
     dragNode.current.removeEventListener('drop', handleDrop)
-    console.log('new idx', dragItem.current.linkIdx)
+    // console.log('new idx', dragItem.current.linkIdx)
     await updateLinksInSection(dragItem.current)
     // increment idx of all links that come after target
     dragItem.current = null;

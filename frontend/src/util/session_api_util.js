@@ -19,3 +19,7 @@ export const login = (userData) => {
 export const patchLayout = (layout) => {
   return axios.patch('/api/users/layout', { layout });
 }
+
+export const getCurrentUser = () => {
+  return axios.get('/api/users/current')
+}

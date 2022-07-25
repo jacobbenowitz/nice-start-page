@@ -26,6 +26,10 @@ const Home = (props) => {
     }
   })
 
+  useEffect(() => {
+    props.fetchCurrentUser()
+  }, [])
+
   const close = (modal) => {
     setEditId(undefined)
     modal === "new" ? toggleNewModal(false) :

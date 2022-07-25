@@ -19,3 +19,13 @@ layout = {
   }
 }
 ```
+
+# Links Component Props
+```javascript
+links = [
+  {
+    label: "01"
+    links: [{…}, {…}]
+  }
+]
+```

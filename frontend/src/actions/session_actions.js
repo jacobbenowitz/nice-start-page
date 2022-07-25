@@ -57,3 +57,9 @@ export const updateLayout = layout => dispatch => {
     dispatch(receiveCurrentUser(user)))
     .catch(err => dispatch(receiveErrors(err)))
 };
+
+export const fetchCurrentUser = () => dispatch => {
+  APIUtil.getCurrentUser().then(user =>
+    dispatch(receiveCurrentUser(user)))
+    .catch(err => dispatch(receiveErrors(err)))
+};

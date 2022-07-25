@@ -20,11 +20,11 @@ const sessionReducer = (prevState = initialState, action) => {
       debugger
       return {
         ...prevState,
-        isAuthenticated: !!action.user,
+        isAuthenticated: !!action.user.data,
+        layout: action.user.data.layout,
         user: {
-          id: action.user._id,
-          firstName: action.user.firstName,
-          layout: action.user.layout
+          id: action.user.data.id,
+          firstName: action.user.data.firstName
         }
       }
     case RECEIVE_USER_LOGOUT:
