@@ -8,7 +8,7 @@ const initialState = {
   errors: []
 }
 
-const NewLink = props => {
+const NewLink = ({ links, cancel, currentUser, createLink, errors }) => {
 
   const [link, updateLink] = useState(initialState);
 
@@ -16,23 +16,23 @@ const NewLink = props => {
     e.preventDefault();
     let linkIdx;
 
-    props.links.forEach(section => {
+    links.forEach(section => {
       if (section.label === link.section) {
         linkIdx = section.links.length;
       }
     })
 
+
     const newLink = {
-      user: props.currentUser.id,
+      user: currentUser.id,
       title: link.title,
       url: link.url,
       section: link.section,
-      date: Date.now(),
-      linkIdx: linkIdx
+      date: Date.now()
     }
-    props.createLink(newLink);
+    createLink(newLink);
     updateLink(initialState);
-    props.cancel();
+    cancel();
   }
 
   const update = (field) => {
@@ -74,7 +74,7 @@ const NewLink = props => {
         />
         <div className="flex flex-row gap-4">
           <button
-            onClick={props.cancel}
+            onClick={cancel}
             className='bg-transparent font-bold text-center w-max px-4 py-1 rounded-md h-10 self-end ring-1 text-gray-50 ring-amber-700
             hover:ring-2 hover:ring-amber-500
             focus:ring-2 focus:ring-amber-300'>

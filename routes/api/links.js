@@ -57,7 +57,25 @@ router.post('/', passport.authenticate(
     })
 
     newLink.save()
-      .then(link => res.json(link))
+      .then(link => {
+        const newLayout = Object.assign({}, req.user.layout);
+        debugger
+        if (newLayout[link.section]) {
+          newLayout[link.section].links[link._id] =
+            newLayout[link.section].links.length;
+        } else {
+          newLayout[link.section] = {
+            sectionIdx: Object.keys(newLayout).length,
+            links: {
+              [link._id]: 0
+            }
+          }
+        }
+        debugger
+        req.user.layout = newLayout;
+        req.user.save();
+        res.json(link);
+      })
       .catch(err => console.log(err))
   })
 

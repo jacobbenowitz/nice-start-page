@@ -1,11 +1,12 @@
-import { createLink } from "../../actions/link_actions";
-import NewLink from "./new_link";
 import { connect } from "react-redux";
+import { createLink } from "../../actions/link_actions";
+import { updateLayout } from "../../actions/session_actions";
+import NewLink from "./new_link";
 
-const mapStateToProps = (state) => {
+const mapStateToProps = ({errors, session}) => {
   return {
-    errors: state.linksErrors,
-    currentUser: state.session.user
+    errors: errors.linksErrors,
+    currentUser: session.user
   };
 }
 

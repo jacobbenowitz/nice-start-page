@@ -19,16 +19,17 @@ const Home = (props) => {
   const [editModal, toggleEditModal] = useState(false);
   const [editId, setEditId] = useState(undefined)
 
-  useEffect(() => {
+  useEffect(async () => {
     if (status === IDLE) {
-      props.fetchUserLinks(props.currentUser.id)
-        .then(() => setStatus(DONE))
+      await props.fetchCurrentUser()
+      await props.fetchUserLinks(props.currentUser.id)
+      setStatus(DONE)
     }
   })
 
-  useEffect(() => {
-    props.fetchCurrentUser()
-  }, [])
+  // useEffect(() => {
+  //   props.fetchCurrentUser()
+  // }, props.currentUser)
 
   const close = (modal) => {
     setEditId(undefined)
@@ -73,13 +74,14 @@ const Home = (props) => {
       <Clock />
       <GoogleSearch />
       {
-        props.linksStatus === DONE ? (
+        props.linksStatus === DONE && status === DONE ? (
           <Links
             userData={props.links}
             open={open}
-            updateLinkIdx={props.updateLinkIdx}
+            updateLink={props.updateLink}
             deleteLink={props.deleteLink}
             updateLayout={props.updateLayout}
+            layout={props.layout}
           />
         ) :
           <div>

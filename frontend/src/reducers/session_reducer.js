@@ -17,7 +17,7 @@ const sessionReducer = (prevState = initialState, action) => {
 
   switch (action.type) {
     case RECEIVE_CURRENT_USER:
-      debugger
+      // debugger
       return {
         ...prevState,
         isAuthenticated: !!action.user.data,

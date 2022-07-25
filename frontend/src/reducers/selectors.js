@@ -5,17 +5,15 @@
 //   }
 // ]
 
+// missing second link in user.layout (linkId)
 export const buildLinksProps = (links = {}, layout = {}) => {
-  debugger
   let sections = []
   Object.keys(layout).forEach(key => {
     let section = {};
     let sectionLinks = layout[key].links;
     section.label = key;
     section.sectionIdx = layout[key].sectionIdx
-    debugger
     section.links = Object.keys(sectionLinks).map(linkId => {
-      debugger
       return {
         ...links[linkId],
         linkIdx: sectionLinks[linkId]
@@ -23,7 +21,6 @@ export const buildLinksProps = (links = {}, layout = {}) => {
     })
     sections.push(section)
   })
-  debugger
   return sortByIdx(sections)
 }
 
@@ -34,7 +31,6 @@ const sortByIdx = (sections) => {
       if (link2.linkIdx > link2.linkIdx) return 1;
       return 0;
     })
-    debugger
     return section;
   })
 }

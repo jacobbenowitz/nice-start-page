@@ -1,8 +1,10 @@
 import React, { useState, useRef, useEffect } from "react";
 import DraggableLink from "./draggable_link";
 import LinkPlaceholder from "./link_placeholder";
+import { merge } from "lodash";
 
-const Links = ({ userData, open, updateLinkIdx, deleteLink, updateLayout }) => {
+const Links = ({ userData, open, layout,
+  deleteLink, updateLayout, updateLink }) => {
 
   const [links, updateLinks] = useState(userData);
   const [dragging, toggleDragging] = useState(false);
@@ -51,7 +53,7 @@ const Links = ({ userData, open, updateLinkIdx, deleteLink, updateLayout }) => {
     toggleDragging(false)
     dragNode.current.removeEventListener('dragend', handleDragEnd)
     dragNode.current.removeEventListener('drop', handleDrop)
-    // console.log('new idx', dragItem.current.linkIdx)
+    console.log('new idx', dragItem.current.linkIdx)
     await updateLinksInSection(dragItem.current)
     // increment idx of all links that come after target
     dragItem.current = null;
@@ -99,15 +101,23 @@ const Links = ({ userData, open, updateLinkIdx, deleteLink, updateLayout }) => {
       }
       let sectionLinks = links[sectionIdx].links;
       let linkSection = links[sectionIdx].label;
-
+      let newLayout = merge({}, layout)
       for (let i = linkIdx; i < sectionLinks.length; i++) {
         let link = sectionLinks[i];
         if (link._id !== targetId.current) {
-          updateLinkIdx(link._id, link.linkIdx + 1, linkSection)
+          newLayout[linkSection].links[link._id] = link.linkIdx + 1;
         } else {
-          updateLinkIdx(targetId.current, linkIdx, linkSection)
+          newLayout[linkSection].links[link._id] = linkIdx;
+        }
+        if (link.section !== linkSection) {
+          debugger;
+          updateLink({
+            ...link,
+            section: linkSection
+          })
         }
       }
+      updateLayout(newLayout)
       resolve('updated all links')
     })
   }

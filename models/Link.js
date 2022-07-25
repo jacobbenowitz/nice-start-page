@@ -22,11 +22,6 @@ const LinkSchema = new Schema({
     type: String,
     default: "main"
   },
-  linkIdx: {
-    type: Number,
-    required: false,
-    default: 0
-  },
   date: {
     type: Date,
     default: Date.now

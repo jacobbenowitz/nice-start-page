@@ -19,7 +19,8 @@ class LoginForm extends React.Component {
 
   componentDidUpdate() {
     // debugger
-    if (this.props.errors.length) {
+    if (this.props.errors.length &&
+      this.state.errors.length !== this.props.errors.length) {
       this.setState({ errors: this.props.errors })
     }
   }
@@ -82,7 +83,7 @@ class LoginForm extends React.Component {
             placeholder={'••••••••••••'}
             errors={this.renderErrors('password')}
           />
-          <div className="spacer w-full h-4"/>
+          <div className="spacer w-full h-4" />
           <button type='submit'
             className='bg-gray-300 font-bold text-center w-max text-gray-900
             px-4 py-1 rounded-md

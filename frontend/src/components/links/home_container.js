@@ -17,7 +17,8 @@ const mapStateToProps = ({ links, errors, session }) => {
     links: buildLinksProps(links.user, session.layout),
     errors: errors.links,
     currentUser: session.user,
-    linksStatus: links.status
+    linksStatus: links.status,
+    layout: session.layout
   };
 }
 
